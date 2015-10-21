@@ -30,7 +30,6 @@ get_header(); ?>
 			<?php
 			// Start the loop.
 			while ( have_posts() ) : the_post();
-				echo "3333";
 				/*
 				 * Include the Post-Format-specific template for the content.
 				 * If you want to override this in a child theme, then include a file
