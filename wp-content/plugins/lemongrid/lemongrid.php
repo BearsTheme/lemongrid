@@ -14,21 +14,27 @@ define( 'TB_NAME', 'bearstheme' );
 define( 'TB_DIR', plugin_dir_path(__FILE__) );
 define( 'TB_URL', plugin_dir_url(__FILE__) );
 define( 'TB_INCLUDES', TB_DIR . "includes" . DIRECTORY_SEPARATOR );
+define( 'TB_SHORTCODES', TB_DIR . "shortcodes" . DIRECTORY_SEPARATOR );
 
 define( 'TB_CSS', TB_URL . "assets/css/" );
 define( 'TB_JS', TB_URL . "assets/js/" );
 define( 'TB_IMAGES', TB_URL . "assets/images/" );
 
 /**
+ * Require functions on plugin
+ */
+require_once TB_INCLUDES . 'functions.php';
+
+/**
  * Use LemonGrid class
  */
-new LemonGrid();
+new LemonGrid;
 
 /**
  * LemonGrid Class
  * 
  */
-class LemonGrid() 
+class LemonGrid
 {
 	/**
 	 * Init function, which is run on site init and plugin loaded
@@ -43,15 +49,15 @@ class LemonGrid()
 		/**
 		 * Visual Composer action
 		 */
-		add_action( 'vc_before_init', array( $this, 'shortcode_lemongrid' ) );
+		add_action( 'vc_before_init', array( $this, 'shortcode' ) );
 	}
 
 	/**
 	 * Shortcode register
 	 */
-	function shortcode_lemongrid() 
+	function shortcode() 
 	{
-		require TB_INCLUDES . 'shortcode_lemongrid.php';
+		require TB_INCLUDES . 'shortcode.php';
 	}
 
 	/**
