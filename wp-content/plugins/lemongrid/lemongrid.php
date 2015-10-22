@@ -39,6 +39,19 @@ class LemonGrid()
 		 * Enqueue Scripts on plugin
 		 */
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_script' ) );
+
+		/**
+		 * Visual Composer action
+		 */
+		add_action( 'vc_before_init', array( $this, 'shortcode_lemongrid' ) );
+	}
+
+	/**
+	 * Shortcode register
+	 */
+	function shortcode_lemongrid() 
+	{
+		require TB_INCLUDES . 'shortcode_lemongrid.php';
 	}
 
 	/**
