@@ -58,9 +58,14 @@ class WPBakeryShortCode_social_lemongrid extends WPBakeryShortCode
 				$media = $insta->getMedia();
 				break;
 			case 'flickr':
+				require_once TB_INCLUDES . 'socials/flickr.class.php';
+				$flickr = new LG_Flickr();
+				$flickr->username = 'mysunday20';
+				$flickr->key = 'f668d07759169ca3db29e9a60bff128d';
+				$media = $flickr->getMedia();
 				break;
 		}
-
+		
 		$atts['media'] = ( isset( $media ) ) ? $media : array();
 		
 		return lgLoadTemplate( $atts, $content );
