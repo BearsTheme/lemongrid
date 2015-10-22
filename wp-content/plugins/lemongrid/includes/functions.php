@@ -28,7 +28,8 @@ function lgFileScanDirectory( $dir, $reg )
 /**
  * lgShortcodeContent
  * 
- * @param string $dirTemp
+ * @param array $attr
+ * @param string $content
  */
 function lgLoadTemplate( $attr, $content = null )
 {	

@@ -18,11 +18,19 @@ vc_map(
 	            'group' => __( 'Source Settings', TB_NAME )
 	        	),
 	    	array(
-	            "type" => "lg_template",
-	            "heading" => __( "Template", TB_NAME ),
-	            "param_name" => "template",
-	            "shortcode" => "social_lemongrid",
-	            "group" => __( "Template", TB_NAME ),
+	            'type' => 'textfield',
+	            'heading' => __( 'Extra Class',TB_NAME ),
+	            'param_name' => 'class',
+	            'value' => '',
+	            'description' => __( '',TB_NAME ),
+	            'group' => __( 'Template', TB_NAME )
+	        ),
+	    	array(
+	            'type' => 'lg_template',
+	            'heading' => __( 'Template', TB_NAME ),
+	            'param_name' => 'template',
+	            'shortcode' => 'social_lemongrid',
+	            'group' => __( 'Template', TB_NAME ),
 	        	),
 	    	)
 		)
