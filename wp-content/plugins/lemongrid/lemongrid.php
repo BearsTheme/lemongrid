@@ -65,16 +65,51 @@ class LemonGrid
 	 */
 	function register_script()
 	{	
+
+		/**
+		 * Lib JS Lodash
+		 */
+		wp_register_script( 'lodash', TB_JS . 'lodash.min.js' );
+
 		/**
 		 * Lib JS Gridstack
 		 */
-		wp_register_script( 'gridstack', TB_JS . 'gridstack.js', array( 'jquery' ) );
+		wp_register_script( 'gridstack', TB_JS . 'gridstack.js', array( 'jquery', 'lodash' ) );
 		wp_register_style('gridstack', TB_CSS . 'gridstack.css', array(), '1.0');
+
+		/**
+		 * Lib ICON Font-awesome
+		 */
+		wp_register_style('font-awesome', 'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css', array(), '1.0');
 
 		/**
 		 * Script LemonGrid
 		 */
 		wp_register_script( 'tb-lemongrid-script', TB_JS . 'lemongrid.js', array( 'jquery', 'gridstack' ) );
 		wp_register_style('tb-lemongrid-script', TB_CSS . 'lemongrid.css', array(), '1.0');
+	}
+
+	/**
+	 * include_script
+	 */
+	public static function include_script() 
+	{
+		wp_enqueue_script( 'jquery' );
+
+		wp_enqueue_script( 'jquery-ui-core' );
+		wp_enqueue_script( 'jquery-ui-widget' );
+		wp_enqueue_script( 'jquery-ui-mouse' );
+		wp_enqueue_script( 'jquery-ui-draggable' );
+		wp_enqueue_script( 'jquery-ui-resizable' );
+		
+		wp_enqueue_script( 'lodash' );
+
+		wp_enqueue_style( 'gridstack' );
+		wp_enqueue_script( 'gridstack' );
+
+		wp_enqueue_style( 'font-awesome' );
+		
+		wp_enqueue_style( 'tb-lemongrid-script' );
+		wp_enqueue_script( 'tb-lemongrid-script' );
 	}
 }

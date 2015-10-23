@@ -52,4 +52,25 @@ function lgLoadTemplate( $attr, $content = null )
 		return __( 'Template not exist!', TB_NAME );
 	endif;
 }
+
+/**
+ * renderGridDefault
+ *
+ * @param int $count
+ * @return array
+ */
+function renderGridDefault( $count = 0 )
+{	
+	$grid = array(); $col = 12; $x = 0; $y = 0;
+	if( $count == 0 ) return $grid;
+
+	while( $count > 0 ) {
+	    array_push( $grid, array( 'x' => $x, 'y' => $y, 'w' => 4, 'h' => 2 ) );
+	    $x += 4;
+	    if( $x >= 12 ) : $x = 0; $y += 2; endif;
+	    $count -= 1;
+	} 
+
+	return $grid;
+}
 ?>

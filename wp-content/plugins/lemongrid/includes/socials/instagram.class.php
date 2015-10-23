@@ -55,7 +55,7 @@ class LG_Instagram
                     'time'          => $data['created_time'],
                     'comments'      => $data['comments']['count'],
                     'likes'         => $data['likes']['count'],
-                    'photo'         => $data['images']['standard_resolution'],
+                    'photo'         => $data['images']['standard_resolution']['url'],
                     'type'          => $data['type']
                 );
 
