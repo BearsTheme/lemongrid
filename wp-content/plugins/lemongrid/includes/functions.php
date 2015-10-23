@@ -33,8 +33,21 @@ function lgFileScanDirectory( $dir, $reg )
  */
 function lgLoadTemplate( $attr, $content = null )
 {	
-	if ( is_file( $attr['template'] ) ) :
-		ob_start(); include $attr['template']; return ob_get_clean();
+	$plg_dir_temp = TB_DIR . 'templates/';
+	$theme_dir_temp = get_template_directory() . '/lemongrid_templates/';
+
+	/**
+	 * Set template path
+	 */
+	$template_path = ( is_file( $theme_dir_temp . $attr['template'] ) ) 
+		? $theme_dir_temp . $attr['template']
+		: $plg_dir_temp . $attr['template']; 
+
+	/**
+	 * Check template path exist
+	 */
+	if ( is_file( $template_path ) ) :
+		ob_start(); include $template_path; return ob_get_clean();
 	else :
 		return __( 'Template not exist!', TB_NAME );
 	endif;

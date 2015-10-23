@@ -47,6 +47,17 @@ class WPBakeryShortCode_social_lemongrid extends WPBakeryShortCode
 			    ), $atts);
 
 		/**
+		 * Enqueue script
+		 */
+		wp_enqueue_script( 'jquery' );
+
+		wp_enqueue_style( 'gridstack' );
+		wp_enqueue_script( 'gridstack' );
+		
+		wp_enqueue_style( 'tb-lemongrid-script' );
+		wp_enqueue_script( 'tb-lemongrid-script' );
+
+		/**
 		 * Setup social
 		 */
 		switch( $atts['social'] ) {
