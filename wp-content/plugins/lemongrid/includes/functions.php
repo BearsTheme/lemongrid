@@ -59,7 +59,7 @@ function lgLoadTemplate( $attr, $content = null )
  * @param int $count
  * @return array
  */
-function renderGridDefault( $count = 0 )
+function lgRenderGridDefault( $count = 0 )
 {	
 	$grid = array(); $col = 12; $x = 0; $y = 0;
 	if( $count == 0 ) return $grid;
@@ -73,4 +73,17 @@ function renderGridDefault( $count = 0 )
 
 	return $grid;
 }
+
+/**
+ * lgToolbarGridBuilder
+ *
+ * @param array $params
+ */
+// function lgToolbarGridBuilder( $params )
+// {
+// 	$output = 'hello dev';
+
+// 	return $output;
+// }
+// add_filter('lemongrid_before_content', 'lgToolbarGridBuilder');
 ?>

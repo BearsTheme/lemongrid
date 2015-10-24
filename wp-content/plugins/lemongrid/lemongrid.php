@@ -111,5 +111,21 @@ class LemonGrid
 		
 		wp_enqueue_style( 'tb-lemongrid-script' );
 		wp_enqueue_script( 'tb-lemongrid-script' );
+
+		/**
+		 * Variable
+		 */
+		$lemongridArr = array(
+			'ajaxurl' => admin_url('admin-ajax.php'),
+			);
+
+		/**
+		 * Check admin login
+		 * On handle grid builder when login with account admin
+		 */
+		if ( is_super_admin() )
+			$lemongridArr['gridBuilder'] = true;
+
+		wp_localize_script( 'tb-lemongrid-script', 'lemongridObj', $lemongridArr );
 	}
 }

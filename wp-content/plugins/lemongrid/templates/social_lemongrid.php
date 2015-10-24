@@ -1,6 +1,12 @@
 <?php
 /* variable */
 $social = $attr['social'];
+list( $template_name ) = explode( '.', $attr['template'] );
+$lemongrid_options = json_encode( array(
+	'cell_height'		=> 120,
+	'vertical_margin'	=> 20,
+	'animate'			=> true,
+	) );
 
 /**
  * instagramSocialTemp
@@ -12,7 +18,7 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 	function itemSocialTemp( $datas, $social )
 	{
 		$output = '';
-		$grid = renderGridDefault( count( $datas ) );
+		$grid = lgRenderGridDefault( count( $datas ) );
 		
 		foreach( $datas as $k => $data ) :
 			$style = implode( ';', array( 
@@ -26,9 +32,19 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 					break;
 				
 				default: /* instagram */
+
+					/* description */
+					$description = ( isset( $data['description'] ) && ! empty( $data['description'] ) ) 
+						? '<div class=\'lemongrid-description\'><p>'. esc_attr( $data['description'] ) .'</p></div>' 
+						: '';
+
 					$info .= '
 					<div class=\'lemongrid-info\'>
-						<h2 class=\'lemongrid-title\'>'. esc_attr( $data['description'] ) .'</h2>
+						<div class=\'lemongrid-icon\'>
+							<a href=\'#\' class=\'lemongrid-icon-picture\'><i class=\'fa fa-picture-o\'></i></a>
+							<a href=\'#\' class=\'lemongrid-icon-link\'><i class=\'fa fa-link\'></i></a>
+						</div>
+						'. __( $description ) .'
 					</div>';
 					break;
 			}
@@ -46,8 +62,9 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 endif;
 
 ?>
-<div class="lemongrid-wrap lemongrid-social social-<?php esc_attr_e( $social ); ?>">
-	<div class="lemongrid-inner grid-stack">
+<div class="lemongrid-wrap lemongrid-social social-<?php esc_attr_e( $social ); ?> <?php esc_attr_e( $template_name ) ?>">
+	<?php echo apply_filters( 'lemongrid_before_content', array() ); ?>
+	<div class="lemongrid-inner grid-stack" data-lemongrid-options="<?php esc_attr_e( $lemongrid_options ); ?>">
 		<?php 
 		if( is_array( $attr['media'] ) && count( $attr['media'] ) > 0 ) :
 			_e( call_user_func( 'itemSocialTemp', $attr['media'], $social ) );
@@ -57,4 +74,5 @@ endif;
 		endif;
 		?>
 	</div>
+	<?php echo apply_filters( 'lemongrid_after_content', array() ); ?>
 </div>

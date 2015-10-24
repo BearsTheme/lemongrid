@@ -1,11 +1,11 @@
-!( function( $ ) {
+! ( function( $ ) {
 	'use strict';
 
 	/**
 	 * lemonGrid Obj
 	 */
 	var lemonGrid = {
-		init: function() {
+		init: function() { console.log( lemongridObj );
 			var self = this,
 				lemongridElem = $( '.grid-stack' );
 
@@ -14,11 +14,14 @@
 
 			lemongridElem.each( function( e ) {
 				var lemonItem = $( this ),
-					options = {
-						cell_height		: 120,
-        				vertical_margin	: 20,
-        				animate			: true,
-					};
+					options = lemonItem.data( 'lemongrid-options' );
+
+				/**
+				 * Disables widgets moving/resizing.
+				 */
+				if( ! lemongridObj.gridBuilder ) {
+					options.static_grid = true;
+				}
 
 				lemonItem.gridstack( options );
 			} )
