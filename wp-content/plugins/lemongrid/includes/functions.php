@@ -31,7 +31,7 @@ function lgFileScanDirectory( $dir, $reg )
  * @param array $attr
  * @param string $content
  */
-function lgLoadTemplate( $attr, $content = null )
+function lgLoadTemplate( $atts, $content = null )
 {	
 	$plg_dir_temp = TB_DIR . 'templates/';
 	$theme_dir_temp = get_template_directory() . '/lemongrid_templates/';
@@ -39,9 +39,9 @@ function lgLoadTemplate( $attr, $content = null )
 	/**
 	 * Set template path
 	 */
-	$template_path = ( is_file( $theme_dir_temp . $attr['template'] ) ) 
-		? $theme_dir_temp . $attr['template']
-		: $plg_dir_temp . $attr['template']; 
+	$template_path = ( is_file( $theme_dir_temp . $atts['template'] ) ) 
+		? $theme_dir_temp . $atts['template']
+		: $plg_dir_temp . $atts['template']; 
 
 	/**
 	 * Check template path exist
@@ -75,15 +75,55 @@ function lgRenderGridDefault( $count = 0 )
 }
 
 /**
- * lgToolbarGridBuilder
- *
+ * lgToolbarFrontend
+ * 
  * @param array $params
+ *
+ * @return HTML 
  */
-// function lgToolbarGridBuilder( $params )
-// {
-// 	$output = 'hello dev';
+function lgToolbarFrontend( $params ) {
+	/**
+	 * Check admin login
+	 */
+	if( ! is_super_admin() ) return;
 
-// 	return $output;
-// }
-// add_filter('lemongrid_before_content', 'lgToolbarGridBuilder');
+	$toolArr = apply_filters( 'lemongrid_toolbar_frontend', array(
+		array(
+			'tag' => 'a',
+			'attrs' => array( 
+				'class' => 'lg-toolbar-icon lg-toolbar-icon--apply', 
+				'href' => '#', 
+				'data-lemongrid-id' => $params['elementID'], 
+				'title' => __( 'Apply layout', TB_NAME ) ),
+			'content' => sprintf( '<i class=\'fa fa-check-square-o\'></i>' ),
+			),
+		array(
+			'tag' => 'a',
+			'attrs' => array( 
+				'class' => 'lg-toolbar-icon lg-toolbar-icon--apply-faverite', 
+				'href' => '#', 
+				'data-lemongrid-id' => $params['elementID'], 
+				'title' => __( 'Apply & Add faverite', TB_NAME ) ),
+			'content' => sprintf( '<i class=\'fa fa-heart\'></i>' ),
+			),
+		), $params );
+
+	$output = '';
+	foreach( $toolArr as $item ) :
+		/**
+	     * Build attr element
+	     */
+		$attrArr = array();
+		if( count( $item['attrs'] ) > 0 )
+			foreach( $item['attrs'] as $attr => $data )
+				array_push( $attrArr, "{$attr}='{$data}'" );
+
+		$output .= "<li class='lemongrid-toolbar-item'><{$item['tag']} ". implode( ' ', $attrArr ) .">{$item['content']}</{$item['tag']}></li>";
+	endforeach;
+
+	return sprintf( '
+		<ul class=\'lemongrid-toolbar\'>
+			%s
+		</ul>', $output );
+}
 ?>

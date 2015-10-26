@@ -27,7 +27,7 @@ class LG_Instagram
 	{
 		$id = $this->getInstaID();
 		
-		$remote = wp_remote_get( "https://api.instagram.com/v1/users/".trim($id)."/media/recent/?client_id=".$this->client_id."&count=".$this->slice, true );
+		$remote = wp_remote_get( "https://api.instagram.com/v1/users/".$id."/media/recent/?client_id=".$this->client_id."&count=".$this->slice, true );
 
 		if (is_wp_error($remote))
             return new WP_Error( 'site_down', __( 'Unable to communicate with Instagram.', 'bearsthemes' ) );
@@ -91,7 +91,7 @@ class LG_Instagram
         {
             if($user->username == $username)
             {
-                return $user->id;
+                return trim( $user->id );
             }
         }
 

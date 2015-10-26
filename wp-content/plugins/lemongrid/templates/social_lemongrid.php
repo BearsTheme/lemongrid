@@ -1,7 +1,8 @@
 <?php
 /* variable */
-$social = $attr['social'];
-list( $template_name ) = explode( '.', $attr['template'] );
+$elementID = date( 'ymdhis' );
+$social = $atts['social'];
+list( $template_name ) = explode( '.', $atts['template'] );
 $lemongrid_options = json_encode( array(
 	'cell_height'		=> 120,
 	'vertical_margin'	=> 20,
@@ -62,17 +63,18 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 endif;
 
 ?>
-<div class="lemongrid-wrap lemongrid-social social-<?php esc_attr_e( $social ); ?> <?php esc_attr_e( $template_name ) ?>">
-	<?php echo apply_filters( 'lemongrid_before_content', array() ); ?>
+<div class="lemongrid-wrap lemongrid--element lemongrid-social social-<?php esc_attr_e( $social ); ?> <?php esc_attr_e( $template_name ) ?>">
+	<?php echo apply_filters( 'lemongrid_toolbar_frontend', lgToolbarFrontend( array( 'elementID' => $elementID, 'atts' => $atts ) ), array() ); ?>
+	<?php echo apply_filters( 'lemongrid_before_content', '', array() ); ?>
 	<div class="lemongrid-inner grid-stack" data-lemongrid-options="<?php esc_attr_e( $lemongrid_options ); ?>">
 		<?php 
-		if( is_array( $attr['media'] ) && count( $attr['media'] ) > 0 ) :
-			_e( call_user_func( 'itemSocialTemp', $attr['media'], $social ) );
+		if( is_array( $atts['media'] ) && count( $atts['media'] ) > 0 ) :
+			_e( call_user_func( 'itemSocialTemp', $atts['media'], $social ) );
 		else :
 			/* error message */
 			_e( '...', TB_NAME );
 		endif;
 		?>
 	</div>
-	<?php echo apply_filters( 'lemongrid_after_content', array() ); ?>
+	<?php echo apply_filters( 'lemongrid_after_content', '', array() ); ?>
 </div>

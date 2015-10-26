@@ -80,7 +80,7 @@ class LemonGrid
 		/**
 		 * Lib ICON Font-awesome
 		 */
-		wp_register_style('font-awesome', 'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css', array(), '1.0');
+		wp_register_style('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', array(), '1.0');
 
 		/**
 		 * Script LemonGrid
@@ -123,7 +123,7 @@ class LemonGrid
 		 * Check admin login
 		 * On handle grid builder when login with account admin
 		 */
-		if ( is_super_admin() )
+		if( is_super_admin() )
 			$lemongridArr['gridBuilder'] = true;
 
 		wp_localize_script( 'tb-lemongrid-script', 'lemongridObj', $lemongridArr );
