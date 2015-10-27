@@ -91,20 +91,10 @@ function lgToolbarFrontend( $params ) {
 		array(
 			'tag' => 'a',
 			'attrs' => array( 
-				'class' => 'lg-toolbar-icon lg-toolbar-icon--apply', 
+				'class' => 'lg-toolbar-icon lg-toolbar-icon--save-layout', 
 				'href' => '#', 
-				'data-lemongrid-id' => $params['elementID'], 
-				'title' => __( 'Apply layout', TB_NAME ) ),
-			'content' => sprintf( '<i class=\'fa fa-check-square-o\'></i>' ),
-			),
-		array(
-			'tag' => 'a',
-			'attrs' => array( 
-				'class' => 'lg-toolbar-icon lg-toolbar-icon--apply-faverite', 
-				'href' => '#', 
-				'data-lemongrid-id' => $params['elementID'], 
-				'title' => __( 'Apply & Add faverite', TB_NAME ) ),
-			'content' => sprintf( '<i class=\'fa fa-heart\'></i>' ),
+				'title' => __( 'Save layout', TB_NAME ) ),
+			'content' => sprintf( '<i class=\'ion-ios-grid-view\'></i>' ),
 			),
 		), $params );
 
@@ -126,4 +116,25 @@ function lgToolbarFrontend( $params ) {
 			%s
 		</ul>', $output );
 }
+
+/**
+ * lbGetLemonGridLayouts
+ */
+function lbGetLemonGridLayouts() {
+	$lemongrid_grid_layouts = get_option( 'lemongrid_grid_layouts', json_encode( array() ) );
+	return json_decode( $lemongrid_grid_layouts, true );
+}
+
+/**
+ * lgApplyLemonGrid
+ */
+function lgApplyLemonGrid() {
+	$layout_arr = lbGetLemonGridLayouts();
+	$layout_arr[$_POST['name']] = $_POST['gridMap'];
+
+	update_option( 'lemongrid_grid_layouts', json_encode( $layout_arr ) );
+	exit();
+}
+add_action( 'wp_ajax_lgApplyLemonGrid', 'lgApplyLemonGrid' );
+add_action( 'wp_ajax_nopriv_lgApplyLemonGrid', 'lgApplyLemonGrid' );
 ?>

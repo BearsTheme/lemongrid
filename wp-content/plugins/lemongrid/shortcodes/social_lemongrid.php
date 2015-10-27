@@ -39,7 +39,7 @@ vc_map(
 class WPBakeryShortCode_social_lemongrid extends WPBakeryShortCode
 {
 	protected function content( $atts, $content = null )
-	{
+	{ 
 		$atts = shortcode_atts( array(
 				'social' 	=> 'instagram',
 				'template'	=> '',

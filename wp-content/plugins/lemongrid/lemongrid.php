@@ -78,9 +78,10 @@ class LemonGrid
 		wp_register_style('gridstack', TB_CSS . 'gridstack.css', array(), '1.0');
 
 		/**
-		 * Lib ICON Font-awesome
+		 * Lib ICON 
 		 */
 		wp_register_style('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', array(), '1.0');
+		wp_register_style('ionicon', 'http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css', array(), '1.0');
 
 		/**
 		 * Script LemonGrid
@@ -108,6 +109,7 @@ class LemonGrid
 		wp_enqueue_script( 'gridstack' );
 
 		wp_enqueue_style( 'font-awesome' );
+		wp_enqueue_style( 'ionicon' );
 		
 		wp_enqueue_style( 'tb-lemongrid-script' );
 		wp_enqueue_script( 'tb-lemongrid-script' );

@@ -14,11 +14,11 @@ function lgShortcodeTemplate( $settings, $value )
 	$output = '';
 	$output .= "<select name=\"" . esc_attr( $settings['param_name'] ) . "\" class=\"wpb_vc_param_value\">";
     foreach ( $files as $name_file => $dir_file ) :
-    	$selected = ( $dir_file == esc_attr( $value ) ) ? 'selected' : '';
+    	$selected = ( $name_file == esc_attr( $value ) ) ? 'selected' : '';
         $output .= "<option value=\"{$name_file}\" {$selected}>{$name_file}</option>";
     endforeach;
     $output .= "</select>";
-
+   
     return $output;
 }
 ?>
