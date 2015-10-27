@@ -120,9 +120,17 @@ function lgToolbarFrontend( $params ) {
 /**
  * lbGetLemonGridLayouts
  */
-function lbGetLemonGridLayouts() {
+function lbGetLemonGridLayouts( $name = '' ) {
 	$lemongrid_grid_layouts = get_option( 'lemongrid_grid_layouts', json_encode( array() ) );
-	return json_decode( $lemongrid_grid_layouts, true );
+	$layoutArr = json_decode( $lemongrid_grid_layouts, true );
+
+	if( ! empty( $name ) ) :
+		$result = isset( $layoutArr[$name] ) ? $layoutArr[$name] : array();
+	else :
+		$result = $layoutArr;
+	endif;
+
+	return $result;
 }
 
 /**

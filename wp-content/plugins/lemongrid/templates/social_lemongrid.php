@@ -15,11 +15,12 @@ $lemongrid_options = json_encode( array(
  * @return HTML
  */
 if( ! function_exists( 'itemSocialTemp' ) ) :
-	function itemSocialTemp( $datas, $social )
+	function itemSocialTemp( $datas, $gridName, $social )
 	{
 		$output = '';
-		$grid = lgRenderGridDefault( count( $datas ) );
-		
+		$gridLayout = lbGetLemonGridLayouts( $gridName );
+		$grid = empty( $gridLayout ) ? lgRenderGridDefault( count( $datas ) ) : $gridLayout;
+
 		foreach( $datas as $k => $data ) :
 			$style = implode( ';', array( 
 				"background: url({$data['photo']}) no-repeat center center / cover, #FFF", 
@@ -60,15 +61,14 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 		return $output;
 	}
 endif;
-
 ?>
-<div class="lemongrid-wrap lemongrid--element social-<?php esc_attr_e( $social ); ?> <?php esc_attr_e( $template_name ) ?>">
+<div class="lemongrid-wrap lemongrid--element social-<?php esc_attr_e( $social ); ?> <?php esc_attr_e( $template_name ) ?> <?php esc_attr_e( $atts['class'] ); ?>">
 	<?php echo apply_filters( 'lemongrid_toolbar_frontend', lgToolbarFrontend( array( 'atts' => $atts ) ), array() ); ?>
 	<?php echo apply_filters( 'lemongrid_before_content', '', array() ); ?>
 	<div class="lemongrid-inner grid-stack" data-lemongrid-options="<?php esc_attr_e( $lemongrid_options ); ?>">
 		<?php 
 		if( is_array( $atts['media'] ) && count( $atts['media'] ) > 0 ) :
-			_e( call_user_func( 'itemSocialTemp', $atts['media'], $social ) );
+			_e( call_user_func( 'itemSocialTemp', $atts['media'], $atts['grid_template'], $social ) );
 		else :
 			_e( '...', TB_NAME );
 		endif;

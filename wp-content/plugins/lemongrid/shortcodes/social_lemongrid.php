@@ -25,6 +25,13 @@ vc_map(
 	            'description' => __( '',TB_NAME ),
 	            'group' => __( 'Template', TB_NAME )
 	        ),
+	        array(
+	        	'type' => 'lg_grid_template',
+	        	'heading' => __( 'Grid Template', TB_NAME ),
+	        	'param_name' => 'grid_template',
+	        	'value' => __( '', TB_NAME ),
+	        	'group' => __( 'Template', TB_NAME ),
+	        	),
 	    	array(
 	            'type' => 'lg_template',
 	            'heading' => __( 'Template', TB_NAME ),
@@ -41,9 +48,10 @@ class WPBakeryShortCode_social_lemongrid extends WPBakeryShortCode
 	protected function content( $atts, $content = null )
 	{ 
 		$atts = shortcode_atts( array(
-				'social' 	=> 'instagram',
-				'template'	=> '',
-				'class' 	=> '',
+				'social' 		=> 'instagram',
+				'grid_template' => '',
+				'template'		=> '',
+				'class' 		=> '',
 			    ), $atts);
 
 		/**
