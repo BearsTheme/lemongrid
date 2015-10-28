@@ -154,4 +154,28 @@ function lgApplyLemonGrid() {
 }
 add_action( 'wp_ajax_lgApplyLemonGrid', 'lgApplyLemonGrid' );
 add_action( 'wp_ajax_nopriv_lgApplyLemonGrid', 'lgApplyLemonGrid' );
+
+/**
+ * renderGridCustomSpaceCss
+ *
+ * @param string $contentID
+ * @param int $space
+ *
+ * @return Css string
+ */
+function renderGridCustomSpaceCss( $contentID, $space = 0 ) {
+	$output = '';
+	$gridWidth = array(  
+		'8.33333333%', '16.66666667%', '25%', '33.33333333%', '41.66666667%', '50%', 
+		'58%', '66.66666667%', '75%', '83.33333333%', '91.66666667%', '100%',
+		);
+
+	$output .= sprintf( '.lemongrid-wrap.%s .lemongrid-inner{ margin-left: -%spx; }', $contentID, $space );
+	$output .= sprintf( '.lemongrid-wrap.%s .lemongrid-inner .lemongrid-item{ margin: 0 0 0 %spx; }', $contentID, $space );
+	foreach( $gridWidth as $k => $itemWidth ) :
+		$output .= sprintf( '.lemongrid-wrap.%s .grid-stack > .grid-stack-item[data-gs-width=\'%s\'] {width: calc( %s - %spx );}', $contentID, $k + 1, $itemWidth, $space );
+	endforeach;
+
+	return $output;
+}
 ?>
