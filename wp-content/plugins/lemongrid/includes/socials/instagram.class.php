@@ -25,7 +25,9 @@ class LG_Instagram
 	 */
 	function getMedia() 
 	{
-		$id = $this->getInstaID();
+		$userInfo = $this->getInstaID(); 
+        $id = $userInfo['id'];
+        $full_name = $userInfo['full_name'];
 		
 		$remote = wp_remote_get( "https://api.instagram.com/v1/users/".$id."/media/recent/?client_id=".$this->client_id."&count=".$this->slice, true );
 
@@ -51,6 +53,7 @@ class LG_Instagram
 
                 $data_item = array(
                     'author_id'     => $id,
+                    'full_name'     => $full_name,
                     'description'   => $data['caption']['text'],
                     'link'          => $data['link'],
                     'time'          => $data['created_time'],
@@ -87,12 +90,12 @@ class LG_Instagram
         if ( 200 != wp_remote_retrieve_response_code( $get ) )
             return new WP_Error( 'invalid_response', __( 'Instagram did not return a 200.', 'bearsthemes') );
         $json = json_decode( $get['body'] );
-
+        
         foreach($json->data as $user)
         {
             if($user->username == $username)
             {
-                return trim( $user->id );
+                return array( 'id' => trim( $user->id ), 'full_name' => trim( $user->full_name ) );
             }
         }
 

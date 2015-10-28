@@ -1,6 +1,12 @@
 /**
  * General Style
  */
+.lg-animate-fadein{
+	opacity: 0;
+	transform: translateY(30px);
+	-webkit-transform: translateY(30px);
+}
+
 .lemongrid-wrap{
 	position: relative;
 }
@@ -150,7 +156,9 @@
 	width: 100%;
 	height: 100%;
 	z-index: 99999;
-	background: rgba(16,16,16,.95);
+	background: #1F1D1D;
+
+	opacity: 0;
 }
 
 .lg-dynamics-modal-wrap a.lg-dynamics-modal-close{
@@ -163,40 +171,78 @@
 	color: #111;
 	text-align: center;
 	line-height: 40px;
+	z-index: 9;
+
+	transform: translateY(-100%);
+	-webkit-transform: translateY(-100%);
 }
 
 .lg-dynamics-modal-wrap .lg-dynamics-modal-inner{
 	position: absolute;
-	left: 50%;
-	top: 50%;
-	max-height: 100%;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
 
-	transform: translateX(-50%) translateY(-50%);
-	-webkit-transform: translateX(-50%) translateY(-50%);
-	-sm-transform: translateX(-50%) translateY(-50%);
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-image,
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail{
+	width: 50%;
+	height: 100%;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-image{
 	opacity: 0;
-	transform: scale(0.8);
-	-webkit-transform: scale(0.8);
+	transform: translateY(-100%);
+	-webkit-transform: translateY(-100%);
 }
 
 .lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-image img{
-	max-height: 100%;
+	object-fit: contain;
+	height: 100%;
+	width: 100%;
 }
 
 .lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail{
-	opacity: 0;
-	padding: 20px;
-	background: #FFF;
+	position: relative;
+	overflow: auto;
+}
+
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail .modal-detail-info{
 	position: absolute;
-	top: 50%;
-	right: 100%;
-	transform: translateY(-50%);
-	-webkit-transform: translateY(-50%);
-	min-height: 100%;
-	width: 270px;
+	width: 100%;
+	padding: 20px;
+	top: 20%;
+	color: #FFF;
+}
+
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail .modal-detail-info .description{
+
+}
+
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail .modal-detail-info .author{
+	color: #555;
+    font-style: italic;
+    margin-bottom: 34px;
+    margin-top: 10px;
+}
+
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail .modal-detail-info .icon-wrap{
+
+}
+
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail .modal-detail-info .icon-wrap span{
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 20px;
+	color: #666;
+}
+
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail .modal-detail-info .icon-wrap span i{
+	margin-right: 5px;
+	color: #FBBC05;
 }
 
 /**

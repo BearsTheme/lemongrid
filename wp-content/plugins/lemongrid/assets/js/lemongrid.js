@@ -35,7 +35,7 @@
 	$.lgDynamicsModalPhoto = function( opts, callback ) {
 		var content = $( '<div>', {
 			class: 'lg-dynamics-modal-wrap',
-			html: '<a href=\'#\' class=\'lg-dynamics-modal-close\'><i class=\'ion-ios-close-empty\'></i></a><div class=\'lg-dynamics-modal-inner\'><div class=\'lg-dynamics-modal-image\'><img src=\''+ opts.photo +'\'/></div><div class=\'lg-dynamics-modal-detail\'></div></div>',
+			html: '<a href=\'#\' class=\'lg-dynamics-modal-close\'><i class=\'ion-ios-close-empty\'></i></a><div class=\'lg-dynamics-modal-inner\'><div class=\'lg-dynamics-modal-image\'><img src=\''+ opts.photo +'\'/></div><div class=\'lg-dynamics-modal-detail\'>'+ opts.detail +'</div></div>',
 		} );
 
 		content.find( 'a.lg-dynamics-modal-close' ).on( 'click', function( e ) {
@@ -50,27 +50,53 @@
 		 */
 		var modalInner = content.find( '.lg-dynamics-modal-inner' ),
 			imgWrap = content.find( '.lg-dynamics-modal-image' ),
-			detailWrap = content.find( '.lg-dynamics-modal-detail' );
+			detailWrap = content.find( '.lg-dynamics-modal-detail' ),
+			closeBtn = content.find( '.lg-dynamics-modal-close' );
 
-		dynamics.animate( imgWrap[0], {
-		    scale: 1,
+		dynamics.animate( content[0], {
 		    opacity: 1,
 	  	}, {
-		    type: dynamics.spring, 
-		    frequency: 408, 
-		    anticipationSize: 98, 
-		    anticipationStrength: 175,
-		    complete: function() {
-		    	dynamics.animate( detailWrap[0], {
-		    		opacity: 1,
-		    	}, {
-		    		type: dynamics.spring, 
-				    frequency: 408, 
-				    anticipationSize: 98, 
-				    anticipationStrength: 175,
-		    	} )
-		    }
+		    type: dynamics.spring, duration: 1500, frequency: 1, friction: 250
 	  	} )
+
+	  	dynamics.animate( closeBtn[0], {
+		    translateY: 0,
+	  	}, {
+		    type: dynamics.spring, duration: 500, delay: 1000
+	  	} )
+
+		setTimeout( function() {
+			dynamics.animate( imgWrap[0], {
+			    translateY: 0,
+			    opacity: 1,
+		  	}, {
+			    type: dynamics.spring, duration: 731, friction: 243
+		  	} )
+		}, 200 )
+
+		if( detailWrap.find( '.lg-animate-fadein' ).length > 0 ) {
+			setTimeout( function() {
+				detailWrap.find( '.lg-animate-fadein' ).each( function( e ) {
+					var index = $( this ).index();
+
+					dynamics.css( this, {
+				      	opacity: 0,
+				      	translateY: 30
+				    } )
+
+					dynamics.animate( this, {
+				      	opacity: 1,
+				      	translateY: 0
+				    }, {
+				      	type: dynamics.spring,
+				      	frequency: 300,
+				      	friction: 435,
+				      	duration: 1000,
+				      	delay: 100 + index * 100
+				    } )
+				} )
+			}, 300 )
+		}
 
 		return content;
 	}
@@ -222,7 +248,8 @@
 				data = $thisEl.data( 'instagram' );
 
 			var modal = $.lgDynamicsModalPhoto( {
-				photo: data.photo
+				photo: data.photo,
+				detail: data.detail_modal,
 			} );
 
 
