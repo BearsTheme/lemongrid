@@ -91,9 +91,18 @@ function lgToolbarFrontend( $params ) {
 		array(
 			'tag' => 'a',
 			'attrs' => array( 
-				'class' => 'lg-toolbar-icon lg-toolbar-icon--save-layout', 
+				'class' => 'lg-toolbar-icon lg-toolbar-icon--save-layout ' . ( empty( $params['atts']['grid_template'] ) ? 'lg-toolbar-icon-disable' : '' ), 
 				'href' => '#', 
-				'title' => __( 'Save layout', TB_NAME ) ),
+				'title' => __( 'Save layout', TB_NAME ), 
+				'data-grid-name' => $params['atts']['grid_template'] ),
+			'content' => sprintf( '<i class=\'fa fa-floppy-o\'></i>' ),
+			),
+		array(
+			'tag' => 'a',
+			'attrs' => array( 
+				'class' => 'lg-toolbar-icon lg-toolbar-icon--save-as-layout', 
+				'href' => '#', 
+				'title' => __( 'Save as layout', TB_NAME ) ),
 			'content' => sprintf( '<i class=\'ion-ios-grid-view\'></i>' ),
 			),
 		), $params );

@@ -81,17 +81,29 @@
 		if( toolbarElem.length <= 0 ) return;
 
 		var self = this,
-			saveLayoutElem = toolbarElem.find( '.lg-toolbar-icon--save-layout' );
+			saveLayoutElem = toolbarElem.find( '.lg-toolbar-icon--save-layout' ),
+			saveAsLayoutElem = toolbarElem.find( '.lg-toolbar-icon--save-as-layout' );
 
 		/**
-		 * applyHandle
+		 * Save layout
 		 */
 		$( saveLayoutElem, 'body' ).on( 'click', function( e ) {
+			e.preventDefault();
+			var lemonGridMap = getLemonGridSize( item.find( '.grid-stack > .grid-stack-item:visible' ) ),
+				grid_name = $( this ).data( 'grid-name' );
+
+			self._request( 'lgApplyLemonGrid', { name: grid_name, gridMap: lemonGridMap }, lgApplyLemonGrid );
+		} )
+
+		/**
+		 * Save as layout
+		 */
+		$( saveAsLayoutElem, 'body' ).on( 'click', function( e ) {
 			e.preventDefault();
 			var lemonGridMap = getLemonGridSize( item.find( '.grid-stack > .grid-stack-item:visible' ) );
 
 			$.lgConfirm( { 
-				title: 'Save grid layout', 
+				title: 'Save as grid layout', 
 				content: '<input type=\'text\' id=\'lg-grid-name\' placeholder=\'layout name\'>', 
 				btnText: 'Add' }, 
 				function( content ) {
