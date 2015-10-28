@@ -50,6 +50,7 @@ class LG_Instagram
                 $data['images']['standard_resolution'] = preg_replace( "/^http:/i", "", $data['images']['standard_resolution'] );
 
                 $data_item = array(
+                    'author_id'     => $id,
                     'description'   => $data['caption']['text'],
                     'link'          => $data['link'],
                     'time'          => $data['created_time'],

@@ -3,11 +3,10 @@
 $social = $atts['social'];
 list( $template_name ) = explode( '.', $atts['template'] );
 $lemongrid_options = json_encode( array(
-	'cell_height'		=> 120,
-	// 'vertical_margin'	=> 20,
+	'cell_height'		=> (int) $atts['cell_height'],
+	'vertical_margin'	=> (int) $atts['space'],
 	'animate'			=> true,
 	) );
-
 /**
  * instagramSocialTemp
  *
@@ -36,14 +35,14 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 
 					/* description */
 					$description = ( isset( $data['description'] ) && ! empty( $data['description'] ) ) 
-						? '<div class=\'lemongrid-description\'><p>'. esc_attr( $data['description'] ) .'</p></div>' 
+						? '<div class=\'lemongrid-description\'><p>'. esc_attr( wp_trim_words( $data['description'], 7, $more = '...' ) ) .'</p></div>' 
 						: '';
 
 					$info .= '
 					<div class=\'lemongrid-info\'>
 						<div class=\'lemongrid-icon\'>
-							<a href=\'#\' class=\'lemongrid-icon-picture\'><i class=\'fa fa-picture-o\'></i></a>
-							<a href=\'#\' class=\'lemongrid-icon-link\'><i class=\'fa fa-link\'></i></a>
+							<a href=\'#\' data-instagram=\''. json_encode( $data ) .'\' class=\'lemongrid-icon-picture\'><i class=\'fa fa-picture-o\'></i></a>
+							<a href=\''. $data['link'] .'\' target=\'_blank\' class=\'lemongrid-icon-link\'><i class=\'fa fa-link\'></i></a>
 						</div>
 						'. __( $description ) .'
 					</div>';
@@ -62,7 +61,7 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 	}
 endif;
 ?>
-<div class="lemongrid-wrap lemongrid--element social-<?php esc_attr_e( $social ); ?> <?php esc_attr_e( $template_name ) ?> <?php esc_attr_e( $atts['class'] ); ?>">
+<div class="lemongrid-wrap <?php esc_attr_e( $atts['elementID'] ); ?> lemongrid--element social-<?php esc_attr_e( $social ); ?> <?php esc_attr_e( $template_name ) ?> <?php esc_attr_e( $atts['class'] ); ?>">
 	<?php echo apply_filters( 'lemongrid_toolbar_frontend', lgToolbarFrontend( array( 'atts' => $atts ) ), array() ); ?>
 	<?php echo apply_filters( 'lemongrid_before_content', '', array() ); ?>
 	<div class="lemongrid-inner grid-stack" data-lemongrid-options="<?php esc_attr_e( $lemongrid_options ); ?>">
