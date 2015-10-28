@@ -80,7 +80,7 @@ class WPBakeryShortCode_social_lemongrid extends WPBakeryShortCode
 		$atts = shortcode_atts( array(
 				'social' 		=> 'instagram',
 				'username'		=> '',
-				'api_key'		=> '',
+				'api_key'		=> '', 
 				'grid_template' => '',
 				'cell_height'	=> 120,
 				'space'			=> 20,

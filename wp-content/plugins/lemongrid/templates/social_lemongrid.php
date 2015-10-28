@@ -41,7 +41,7 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 					$info .= '
 					<div class=\'lemongrid-info\'>
 						<div class=\'lemongrid-icon\'>
-							<a href=\'#\' class=\'lemongrid-icon-picture\'><i class=\'fa fa-picture-o\'></i></a>
+							<a href=\'#\' data-instagram=\''. json_encode( $data ) .'\' class=\'lemongrid-icon-picture\'><i class=\'fa fa-picture-o\'></i></a>
 							<a href=\''. $data['link'] .'\' target=\'_blank\' class=\'lemongrid-icon-link\'><i class=\'fa fa-link\'></i></a>
 						</div>
 						'. __( $description ) .'

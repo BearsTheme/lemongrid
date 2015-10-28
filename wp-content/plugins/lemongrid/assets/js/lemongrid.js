@@ -30,6 +30,52 @@
 	}
 	
 	/**
+	 * DynamicsModal
+	 */
+	$.lgDynamicsModalPhoto = function( opts, callback ) {
+		var content = $( '<div>', {
+			class: 'lg-dynamics-modal-wrap',
+			html: '<a href=\'#\' class=\'lg-dynamics-modal-close\'><i class=\'ion-ios-close-empty\'></i></a><div class=\'lg-dynamics-modal-inner\'><div class=\'lg-dynamics-modal-image\'><img src=\''+ opts.photo +'\'/></div><div class=\'lg-dynamics-modal-detail\'></div></div>',
+		} );
+
+		content.find( 'a.lg-dynamics-modal-close' ).on( 'click', function( e ) {
+			e.preventDefault();
+			content.remove();
+		} )
+
+		$( 'body' ).append( content );
+
+		/**
+		 * Animate
+		 */
+		var modalInner = content.find( '.lg-dynamics-modal-inner' ),
+			imgWrap = content.find( '.lg-dynamics-modal-image' ),
+			detailWrap = content.find( '.lg-dynamics-modal-detail' );
+
+		dynamics.animate( imgWrap[0], {
+		    scale: 1,
+		    opacity: 1,
+	  	}, {
+		    type: dynamics.spring, 
+		    frequency: 408, 
+		    anticipationSize: 98, 
+		    anticipationStrength: 175,
+		    complete: function() {
+		    	dynamics.animate( detailWrap[0], {
+		    		opacity: 1,
+		    	}, {
+		    		type: dynamics.spring, 
+				    frequency: 408, 
+				    anticipationSize: 98, 
+				    anticipationStrength: 175,
+		    	} )
+		    }
+	  	} )
+
+		return content;
+	}
+
+	/**
 	 * General func
 	 */
 	function getLemonGridSize( elem ) {
@@ -165,8 +211,21 @@
 		/**
 		 * Use lemonGrid
 		 */
-		new lemonGrid( '.lemongrid--element', {
+		new lemonGrid( '.lemongrid--element' );
 
-		} );
+		/**
+		 * Social Modal Detail
+		 */
+		$( '.lemongrid-wrap' ).on( 'click', '[data-instagram]', function( e ) {
+			e.preventDefault();
+			var $thisEl = $( this ),
+				data = $thisEl.data( 'instagram' );
+
+			var modal = $.lgDynamicsModalPhoto( {
+				photo: data.photo
+			} );
+
+
+		} )
 	} )
 } )( jQuery )

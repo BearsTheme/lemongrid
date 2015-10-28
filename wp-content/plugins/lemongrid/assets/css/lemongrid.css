@@ -74,6 +74,9 @@
 	vertical-align: top;
 }
 
+/**
+ * Confirm
+ */
 .lg-modal-wrap{
 	position: fixed;
 	z-index: 99999;
@@ -135,6 +138,65 @@
 .lg-modal-wrap .lg-modal-inner .lg-modal-ok:hover{
 	background: #669c22;
 	border-color: #669c22;
+}
+
+/**
+ * Dynamics Modal
+ */
+.lg-dynamics-modal-wrap{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 99999;
+	background: rgba(16,16,16,.95);
+}
+
+.lg-dynamics-modal-wrap a.lg-dynamics-modal-close{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 40px;
+	height: 40px;
+	background: #FBBC05;
+	color: #111;
+	text-align: center;
+	line-height: 40px;
+}
+
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	max-height: 100%;
+
+	transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-sm-transform: translateX(-50%) translateY(-50%);
+}
+
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-image{
+	opacity: 0;
+	transform: scale(0.8);
+	-webkit-transform: scale(0.8);
+}
+
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-image img{
+	max-height: 100%;
+}
+
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail{
+	opacity: 0;
+	padding: 20px;
+	background: #FFF;
+	position: absolute;
+	top: 50%;
+	right: 100%;
+	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	min-height: 100%;
+	width: 270px;
 }
 
 /**
