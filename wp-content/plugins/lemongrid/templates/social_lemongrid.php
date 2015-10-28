@@ -4,7 +4,7 @@ $social = $atts['social'];
 list( $template_name ) = explode( '.', $atts['template'] );
 $lemongrid_options = json_encode( array(
 	'cell_height'		=> 120,
-	'vertical_margin'	=> 20,
+	// 'vertical_margin'	=> 20,
 	'animate'			=> true,
 	) );
 
