@@ -193,6 +193,19 @@
 	vertical-align: middle;
 }
 
+@media (max-width: 767px) {
+	.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-image,
+	.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail{
+		width: 100%;
+	}
+	.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-image{
+		height: 40%;
+	}
+	.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail{
+		height: 60%;
+	}
+}
+
 .lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-image{
 	opacity: 0;
 	transform: translateY(-100%);

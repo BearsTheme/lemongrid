@@ -171,7 +171,7 @@ function renderGridCustomSpaceCss( $contentID, $space = 0 ) {
 		);
 
 	$output .= sprintf( '.lemongrid-wrap.%s .lemongrid-inner{ margin-left: -%spx; }', $contentID, $space );
-	$output .= sprintf( '.lemongrid-wrap.%s .lemongrid-inner .lemongrid-item{ margin: 0 0 0 %spx; }', $contentID, $space );
+	$output .= sprintf( '.lemongrid-wrap.%s .lemongrid-inner .lemongrid-item{ margin: 0 0 20px %spx; }', $contentID, $space );
 	foreach( $gridWidth as $k => $itemWidth ) :
 		$output .= sprintf( '.lemongrid-wrap.%s .grid-stack > .grid-stack-item[data-gs-width=\'%s\'] {width: calc( %s - %spx );}', $contentID, $k + 1, $itemWidth, $space );
 	endforeach;
