@@ -303,7 +303,7 @@
 	background: rgba( 255,255,255,.0 );
 }
 
-.lemongrid-wrap.social_lemongrid .lemongrid-item .lemongrid-info:hover,
+.lemongrid-wrap.social_lemongrid .lemongrid-item:focus .lemongrid-info,
 .lemongrid-wrap.social_lemongrid .lemongrid-item:hover .lemongrid-info{
 	background: rgba( 16,16,16,.8 );
 }
