@@ -363,7 +363,6 @@
 	 * DOM load complete
 	 */
 	$( function() {
-
 		/**
 		 * Use lemonGrid
 		 */
@@ -372,8 +371,9 @@
 		/**
 		 * Social Modal Instagram
 		 */
-		$( 'body' ).on( 'click', '[data-instagram]', function( e ) {
+		$( 'body' ).on( 'click', 'a[data-instagram]', function( e ) {
 			e.preventDefault();
+
 			var $thisEl = $( this ),
 				index = $( '[data-instagram]', 'body' ).index( this );
 
