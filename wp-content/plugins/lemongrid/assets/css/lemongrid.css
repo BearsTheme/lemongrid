@@ -3,8 +3,8 @@
  */
 .lg-animate-fadein{
 	opacity: 0;
-	transform: translateY(30px);
-	-webkit-transform: translateY(30px);
+	transform: translateY(40px);
+	-webkit-transform: translateY(40px);
 }
 
 .lemongrid-wrap{
@@ -138,8 +138,8 @@
 	vertical-align: top;
 	background: #afd23e;
 	border-color: #afd23e;
-	transition: .3s;
-	-webkit-transition: .3s;
+	transition: background border .3s;
+	-webkit-transition: background border .3s;
 }
 .lg-modal-wrap .lg-modal-inner .lg-modal-ok:hover{
 	background: #669c22;
@@ -224,10 +224,10 @@
 }
 
 .lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail .modal-detail-info{
-	position: absolute;
+	position: relative;
 	width: 100%;
 	padding: 20px;
-	top: 20%;
+	margin-top: 8%;
 	color: #FFF;
 }
 
@@ -256,6 +256,25 @@
 .lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail .modal-detail-info .icon-wrap span i{
 	margin-right: 5px;
 	color: #FBBC05;
+}
+
+.lg-dynamics-modal-wrap .lg-next-prev-wrap{
+	display: inline-block;
+	font-size: 0;
+}
+
+.lg-dynamics-modal-wrap .lg-next-prev-wrap a{
+	display: inline-block;
+	vertical-align: top;
+	width: 60px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	font-size: 40px;
+}
+
+.lg-dynamics-modal-wrap .lg-next-prev-wrap a i{
+	color: #FFF;
 }
 
 /**
