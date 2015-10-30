@@ -101,16 +101,14 @@ class WPBakeryShortCode_social_lemongrid extends WPBakeryShortCode
 				require_once TB_INCLUDES . 'socials/instagram.class.php';
 				$insta = new LG_Instagram();
 				$insta->username = $atts['username'];
-				// $insta->client_id = '2a87113cbe65405aa10b491fc6e39242';
-				$insta->client_id = $atts['api_key'];
+				$insta->client_id = $atts['api_key']; // '2a87113cbe65405aa10b491fc6e39242';
 				$media = $insta->getMedia();
 				break;
 			case 'flickr':
 				require_once TB_INCLUDES . 'socials/flickr.class.php';
 				$flickr = new LG_Flickr();
 				$flickr->username = $atts['username'];
-				// $flickr->key = 'f668d07759169ca3db29e9a60bff128d';
-				$flickr->key = $atts['api_key'];
+				$flickr->key = $atts['api_key']; // 'f668d07759169ca3db29e9a60bff128d';
 				$media = $flickr->getMedia();
 				break;
 		}

@@ -269,6 +269,33 @@
 		} )
 	}
 
+	/**
+	 * Animate fadeIn
+	 */
+	lemonGrid.prototype._scrollAnimateFadeIn = function( lemonItem ) {
+		
+		if( lemonItem.find( '.lg-animate-fadein' ).length > 0 ) {
+			$( window ).load( function() {
+				var scrollTop = 0,
+					winHeight = 0,
+					elemInfo = {
+						top 	: lemonItem.offset().top,
+						height 	: lemonItem.height(),
+					};
+
+				$( window ).scroll( function() {
+					scrollTop = $( this ).scrollTop();
+					winHeight = $( this ).height();
+
+					if( ( scrollTop + winHeight ) >= ( elemInfo.top - 100 ) ) {
+						lgAnimFaceIn( lemonItem.find( '.lg-animate-fadein' ) );
+						lemonItem.find( '.lg-animate-fadein' ).removeClass( 'lg-animate-fadein' );
+					}
+				} ).trigger( 'scroll' )
+			} )
+		}
+	}
+
 	lemonGrid.prototype._init = function() {
 		/**
 		 * Check lemonGridItems exist
@@ -290,6 +317,7 @@
 
 			gridStack.gridstack( options );
 
+			self._scrollAnimateFadeIn( lemonItem );
 			self._toolbarHandle( lemonItem );
 		} )
 	}
@@ -360,6 +388,27 @@
 	}
 
 	/**
+	 * Call modal flickr
+	 */
+	function flickrCallModal( $elem, index, direct ) {
+		var data = $elem.data( 'flickr' ),
+			next_prev_wrap = handleNextPrevModal( '[data-flickr]', index, flickrCallModal );
+
+		if( $( '.lg-dynamics-modal-wrap' ).length > 0 ) {
+			$( '.lg-dynamics-modal-wrap' ).trigger( 'close' );
+		}
+
+		var modal = new $.lgDynamicsModalPhoto( {
+			photo: data.photo,
+			detail: data.detail_modal,
+		} );
+
+		modal.content.find( '.lg-dynamics-modal-detail' ).prepend( next_prev_wrap );
+
+		return modal;
+	}
+
+	/**
 	 * DOM load complete
 	 */
 	$( function() {
@@ -378,6 +427,18 @@
 				index = $( '[data-instagram]', 'body' ).index( this );
 
 			var modal = instagramCallModal( $thisEl, index );
+		} )
+
+		/**
+		 * Social Modal Instagram
+		 */
+		$( 'body' ).on( 'click', 'a[data-flickr]', function( e ) {
+			e.preventDefault();
+
+			var $thisEl = $( this ),
+				index = $( '[data-flickr]', 'body' ).index( this );
+
+			var modal = flickrCallModal( $thisEl, index );
 		} )
 
 	} )

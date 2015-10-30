@@ -23,7 +23,10 @@ class LG_Flickr
 	 */
 	function getMedia()
 	{
-		$user_id = $this->getUserID();
+		$userInfo = $this->getUserID(); 
+        $user_id = $userInfo['user_id'];
+        $username = $userInfo['username'];
+
 		$params = array(
 			'method' 			=> 'flickr.people.getPhotos',
 			'api_key' 			=> $this->key,
@@ -57,6 +60,7 @@ class LG_Flickr
         	$data['photo'] 	= sprintf( 'https://farm%s.staticflickr.com/%s/%s_%s.jpg', $data['farm'], $data['server'], $data['id'], $data['secret'] );
 
         	$data_item = array(
+        			'username'		=> $username,
                     'link'          => $data['link'],
                     'photo'         => $data['photo'],
                 );
@@ -92,7 +96,7 @@ class LG_Flickr
 
         $data = json_decode( $get['body'] );
 
-        return ( $data->user->id ) ? $data->user->id : '';
+        return ( $data->user->id ) ? array( 'user_id' => $data->user->id, 'username' => $data->user->username->_content ) : array();
 	}
 }
 ?>

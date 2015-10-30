@@ -28,7 +28,26 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 			$info = '';
 			switch ( $social ) {
 				case 'flickr':
-					
+					/* description */
+					$description = ( isset( $data['title'] ) && ! empty( $data['title'] ) ) 
+						? '<div class=\'lemongrid-description\'><p>'. esc_attr( wp_trim_words( $data['title'], 7, $more = '...' ) ) .'</p></div>' 
+						: '';
+
+					/* Detail modal */
+					$data['detail_modal'] = '
+					<div class=\'modal-detail-info\'>
+						<div class=\'description lg-animate-fadein\'>'. $data['title'] .'</div>
+						<p class=\'author lg-animate-fadein\'>- '. $data['username'] .'</p>
+					</div>';
+
+					$info .= '
+					<div class=\'lemongrid-info\'>
+						<div class=\'lemongrid-icon\'>
+							<a href=\'#\' data-flickr=\''. json_encode( str_replace( "'", '&#39;', $data ) ) .'\' class=\'lemongrid-icon-picture\'><i class=\'fa fa-picture-o\'></i></a>
+							<a href=\''. $data['link'] .'\' target=\'_blank\' class=\'lemongrid-icon-link\'><i class=\'fa fa-link\'></i></a>
+						</div>
+						'. __( $description ) .'
+					</div>';
 					break;
 				
 				default: /* instagram */
@@ -62,7 +81,7 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 			}
 
 			$output .= '
-				<div class=\'lemongrid-item grid-stack-item\' data-gs-x=\''. esc_attr( $grid[$k]['x'] ) .'\' data-gs-y=\''. esc_attr( $grid[$k]['y'] ) .'\' data-gs-width=\''. esc_attr( $grid[$k]['w'] ) .'\' data-gs-height=\''. esc_attr( $grid[$k]['h'] ) .'\'>
+				<div class=\'lemongrid-item lg-animate-fadein grid-stack-item\' data-gs-x=\''. esc_attr( $grid[$k]['x'] ) .'\' data-gs-y=\''. esc_attr( $grid[$k]['y'] ) .'\' data-gs-width=\''. esc_attr( $grid[$k]['w'] ) .'\' data-gs-height=\''. esc_attr( $grid[$k]['h'] ) .'\'>
 					<div class=\'grid-stack-item-content\' style=\''. esc_attr( $style ) .'\'>
 						'. __( $info ) .'
 					</div>
