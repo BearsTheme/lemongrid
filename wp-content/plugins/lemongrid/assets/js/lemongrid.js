@@ -348,7 +348,7 @@
 		prevEl.on( 'click', function( e ) {
 			e.preventDefault();
 
-			var siblings = lgGetSiblings( '[data-instagram]', index ),
+			var siblings = lgGetSiblings( selector, index ),
 				$elem = siblings.prev;
 
 			callback.call( this, $elem, index - 1,'prev' );
@@ -357,7 +357,7 @@
 		nextEl.on( 'click', function( e ) {
 			e.preventDefault();
 
-			var siblings = lgGetSiblings( '[data-instagram]', index ),
+			var siblings = lgGetSiblings( selector, index ),
 				$elem = siblings.next;
 
 			callback.call( this, $elem, index + 1, 'next' );
@@ -404,6 +404,38 @@
 		} );
 
 		modal.content.find( '.lg-dynamics-modal-detail' ).prepend( next_prev_wrap );
+
+		/**
+		 * Update info
+		 */
+		$.ajax( {
+			type: 'POST',
+			url: lemongridObj.ajaxurl,
+			data: { action: 'lgUpdateInfoFlickr', data: data },
+			success: function( result ) {
+				var obj = JSON.parse( result );
+
+				/**
+				 * Check description exist
+				 */
+				var des_str = '';
+				if( obj.photo.description._content )
+					des_str = obj.photo.description._content;
+
+				var $description = $( '<p>', { class: 'lg-after-animate', html: des_str } );
+				modal.content.find( '.description' ).html( $description );
+
+				/**
+				 * icon
+				 */
+				var comment = obj.photo.comments._content, date = obj.photo.dates.posted;
+				var $comment = $( '<span>', { class: 'icon-comments lg-after-animate', html: '<i class=\'ion-android-textsms\'></i>' + comment } );
+				var $date = $( '<span>', { class: 'icon-time lg-after-animate', html: '<i class=\'ion-ios-calendar-outline\'></i>' + date } );
+				modal.content.find( '.icon-wrap' ).html( $comment ).append( $date );
+
+				lgAnimFaceIn( modal.content.find( '.lg-after-animate' ) );
+			}
+		} )
 
 		return modal;
 	}

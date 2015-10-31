@@ -60,6 +60,7 @@ class LG_Flickr
         	$data['photo'] 	= sprintf( 'https://farm%s.staticflickr.com/%s/%s_%s.jpg', $data['farm'], $data['server'], $data['id'], $data['secret'] );
 
         	$data_item = array(
+        			'api_key'		=> $this->key,
         			'username'		=> $username,
                     'link'          => $data['link'],
                     'photo'         => $data['photo'],
@@ -69,6 +70,28 @@ class LG_Flickr
         endforeach;
 
         return array_slice( $flickr, 0, $this->slice );
+	}
+
+	/**
+	 * 
+	 */
+	public static function getInfo( $key, $photoID, $secret ) {
+		$params = array(
+			'method' 			=> 'flickr.photos.getInfo',
+			'api_key' 			=> $key,
+			'photo_id' 			=> $photoID,
+			'secret'			=> $secret,
+			'format' 			=> 'json',
+			'nojsoncallback' 	=> 1
+			);
+
+		$uri_request = 'https://api.flickr.com/services/rest/?' . http_build_query( $params );
+
+		$get = wp_remote_get( $uri_request );
+
+		$data = json_decode( $get['body'] );
+
+		return $data;
 	}
 
 	/**

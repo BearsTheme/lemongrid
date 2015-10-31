@@ -156,6 +156,19 @@ add_action( 'wp_ajax_lgApplyLemonGrid', 'lgApplyLemonGrid' );
 add_action( 'wp_ajax_nopriv_lgApplyLemonGrid', 'lgApplyLemonGrid' );
 
 /**
+ * lgUpdateInfoFlickr
+ */
+function lgUpdateInfoFlickr() {
+	require_once TB_INCLUDES . 'socials/flickr.class.php';
+	
+	$result = LG_Flickr::getInfo( $_POST['data']['api_key'], $_POST['data']['id'], $_POST['data']['secret'] );
+	echo json_encode( $result );
+	exit();
+}
+add_action( 'wp_ajax_lgUpdateInfoFlickr', 'lgUpdateInfoFlickr' );
+add_action( 'wp_ajax_nopriv_lgUpdateInfoFlickr', 'lgUpdateInfoFlickr' );
+
+/**
  * renderGridCustomSpaceCss
  *
  * @param string $contentID

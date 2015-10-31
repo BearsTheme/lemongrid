@@ -28,16 +28,20 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 			$info = '';
 			switch ( $social ) {
 				case 'flickr':
-					/* description */
+					/* title */
 					$description = ( isset( $data['title'] ) && ! empty( $data['title'] ) ) 
 						? '<div class=\'lemongrid-description\'><p>'. esc_attr( wp_trim_words( $data['title'], 7, $more = '...' ) ) .'</p></div>' 
 						: '';
 
 					/* Detail modal */
 					$data['detail_modal'] = '
-					<div class=\'modal-detail-info\'>
-						<div class=\'description lg-animate-fadein\'>'. $data['title'] .'</div>
+					<div class=\'modal-detail-info '. $social .'\'>
+						<div class=\'title lg-animate-fadein\'><h4>'. $data['title'] .'</h4></div>
+						<div class=\'description lg-animate-fadein\'><i class=\'fa fa-circle-o-notch fa-spin\'></i></div>
 						<p class=\'author lg-animate-fadein\'>- '. $data['username'] .'</p>
+						<div class=\'icon-wrap lg-animate-fadein\'>
+							<i class=\'fa fa-circle-o-notch fa-spin\'></i>
+						</div>
 					</div>';
 
 					$info .= '
@@ -59,13 +63,13 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 
 					/* Detail modal */
 					$data['detail_modal'] = '
-					<div class=\'modal-detail-info\'>
+					<div class=\'modal-detail-info '. $social .'\'>
 						<div class=\'description lg-animate-fadein\'>'. $data['description'] .'</div>
 						<p class=\'author lg-animate-fadein\'>- '. $data['full_name'] .'</p>
 						<div class=\'icon-wrap\'>
 							<span class=\'icon-likes lg-animate-fadein\'><i class=\'ion-android-favorite\'></i> '. $data['likes'] .'</span>
 							<span class=\'icon-comments lg-animate-fadein\'><i class=\'ion-android-textsms\'></i> '. $data['comments'] .'</span>
-							<span class=\'icon-time lg-animate-fadein\'><i class=\'ion-ios-clock\'></i> '. $data['time'] .'</span>
+							<span class=\'icon-time lg-animate-fadein\'><i class=\'ion-ios-calendar-outline\'></i> '. $data['time'] .'</span>
 						</div>
 					</div>';
 

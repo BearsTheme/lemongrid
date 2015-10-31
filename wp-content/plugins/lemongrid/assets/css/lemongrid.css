@@ -231,8 +231,20 @@
 	color: #FFF;
 }
 
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail .modal-detail-info .title h4{
+	font-weight: normal;
+    letter-spacing: 2px;
+    margin: 0 0 30px;
+    text-transform: uppercase;
+}
+
 .lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail .modal-detail-info .description{
 
+}
+
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail .modal-detail-info.flickr .description{
+	color: #aaa;
+    font-size: 16px;
 }
 
 .lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail .modal-detail-info .author{
