@@ -193,7 +193,7 @@
 	vertical-align: middle;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 980px) {
 	.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-image,
 	.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-detail{
 		width: 100%;

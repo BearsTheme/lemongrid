@@ -428,10 +428,11 @@
 				/**
 				 * icon
 				 */
-				var comment = obj.photo.comments._content, date = obj.photo.dates.posted;
+				var favorite = obj.photo.isfavorite, comment = obj.photo.comments._content, date = obj.photo.dates.posted;
+				var $favorite = $( '<span>', { class: 'icon-likes lg-after-animate', html: '<i class=\'ion-android-favorite\'></i>' + favorite } );
 				var $comment = $( '<span>', { class: 'icon-comments lg-after-animate', html: '<i class=\'ion-android-textsms\'></i>' + comment } );
 				var $date = $( '<span>', { class: 'icon-time lg-after-animate', html: '<i class=\'ion-ios-calendar-outline\'></i>' + date } );
-				modal.content.find( '.icon-wrap' ).html( $comment ).append( $date );
+				modal.content.find( '.icon-wrap' ).html( $favorite ).append( $comment ).append( $date );
 
 				lgAnimFaceIn( modal.content.find( '.lg-after-animate' ) );
 			}

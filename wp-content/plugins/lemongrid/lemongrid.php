@@ -86,7 +86,7 @@ class LemonGrid
 		 * Lib ICON 
 		 */
 		wp_register_style('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', array(), '1.0');
-		wp_register_style('ionicon', 'http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css', array(), '1.0');
+		wp_register_style('ionicon', TB_CSS . 'ionicons.min.css', array(), '1.0');
 
 		/**
 		 * Script LemonGrid
