@@ -56,9 +56,9 @@ class LG_Instagram
                     'full_name'     => $full_name,
                     'description'   => $data['caption']['text'],
                     'link'          => $data['link'],
-                    'time'          => $data['created_time'],
-                    'comments'      => $data['comments']['count'],
-                    'likes'         => $data['likes']['count'],
+                    'time'          => lgElapsedTimeString( date( 'Y-m-d H:i:s', $data['created_time'] ) ),
+                    'comments'      => lgCustomNumberFormat( $data['comments']['count'] ),
+                    'likes'         => lgCustomNumberFormat( $data['likes']['count'] ),
                     'photo'         => $data['images']['standard_resolution']['url'],
                     'type'          => $data['type']
                 );

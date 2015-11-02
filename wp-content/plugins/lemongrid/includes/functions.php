@@ -81,7 +81,8 @@ function lgRenderGridDefault( $count = 0 )
  *
  * @return HTML 
  */
-function lgToolbarFrontend( $params ) {
+function lgToolbarFrontend( $params ) 
+{
 	/**
 	 * Check admin login
 	 */
@@ -129,7 +130,8 @@ function lgToolbarFrontend( $params ) {
 /**
  * lbGetLemonGridLayouts
  */
-function lbGetLemonGridLayouts( $name = '' ) {
+function lbGetLemonGridLayouts( $name = '' ) 
+{
 	$lemongrid_grid_layouts = get_option( 'lemongrid_grid_layouts', json_encode( array() ) );
 	$layoutArr = json_decode( $lemongrid_grid_layouts, true );
 
@@ -145,7 +147,8 @@ function lbGetLemonGridLayouts( $name = '' ) {
 /**
  * lgApplyLemonGrid
  */
-function lgApplyLemonGrid() {
+function lgApplyLemonGrid() 
+{
 	$layout_arr = lbGetLemonGridLayouts();
 	$layout_arr[$_POST['name']] = $_POST['gridMap'];
 
@@ -158,7 +161,8 @@ add_action( 'wp_ajax_nopriv_lgApplyLemonGrid', 'lgApplyLemonGrid' );
 /**
  * lgUpdateInfoFlickr
  */
-function lgUpdateInfoFlickr() {
+function lgUpdateInfoFlickr() 
+{
 	require_once TB_INCLUDES . 'socials/flickr.class.php';
 	
 	$result = LG_Flickr::getInfo( $_POST['data']['api_key'], $_POST['data']['id'], $_POST['data']['secret'] );
@@ -176,7 +180,8 @@ add_action( 'wp_ajax_nopriv_lgUpdateInfoFlickr', 'lgUpdateInfoFlickr' );
  *
  * @return Css string
  */
-function renderGridCustomSpaceCss( $contentID, $space = 0 ) {
+function renderGridCustomSpaceCss( $contentID, $space = 0 ) 
+{
 	$output = '';
 	$gridWidth = array(  
 		'8.33333333%', '16.66666667%', '25%', '33.33333333%', '41.66666667%', '50%', 
@@ -190,5 +195,66 @@ function renderGridCustomSpaceCss( $contentID, $space = 0 ) {
 	endforeach;
 
 	return $output;
+}
+
+/**
+ * multi-purpose function to calculate the time elapsed between $start and optional $end
+ * @param string|null $start the date string to start calculation
+ * @param string|null $end the date string to end calculation
+ * @param string $suffix the suffix string to include in the calculated string
+ * @param string $format the format of the resulting date if limit is reached or no periods were found
+ * @param string $separator the separator between periods to use when filter is not true
+ * @param null|string $limit date string to stop calculations on and display the date if reached - ex: 1 month
+ * @param bool|array $filter false to display all periods, true to display first period matching the minimum, or array of periods to display ['year', 'month']
+ * @param int $minimum the minimum value needed to include a period
+ * @return string
+ */
+function lgElapsedTimeString( $start, $end = null, $limit = null, $filter = true, $suffix = 'ago', $format = 'Y-m-d', $separator = ' ', $minimum = 1 )
+{
+    $dates = (object) array(
+        'start' => new DateTime($start ? : __( 'now', TB_NAME ) ),
+        'end' => new DateTime($end ? : __( 'now', TB_NAME ) ),
+        'intervals' => array('y' => __( 'year', TB_NAME ), 'm' => __( 'month', TB_NAME ), 'd' => __( 'day', TB_NAME ), 'h' => __( 'hour', TB_NAME ), 'i' => __( 'minute', TB_NAME ), 's' => __( 'second', TB_NAME ) ),
+        'periods' => array()
+    );
+    $elapsed = (object) array(
+        'interval' => $dates->start->diff($dates->end),
+        'unknown' => 'unknown'
+    );
+    if ($elapsed->interval->invert === 1) {
+        return trim('0 seconds ' . $suffix);
+    }
+    if (false === empty($limit)) {
+        $dates->limit = new DateTime($limit);
+        if (date_create()->add($elapsed->interval) > $dates->limit) {
+            return $dates->start->format($format) ? : $elapsed->unknown;
+        }
+    }
+    if (true === is_array($filter)) {
+        $dates->intervals = array_intersect($dates->intervals, $filter);
+        $filter = false;
+    }
+    foreach ($dates->intervals as $period => $name) {
+        $value = $elapsed->interval->$period;
+        if ($value >= $minimum) {
+            $dates->periods[] = vsprintf('%1$s %2$s%3$s', array($value, $name, ($value !== 1 ? 's' : '')));
+            if (true === $filter) {
+                break;
+            }
+        }
+    }
+    if (false === empty($dates->periods)) {
+        return trim(vsprintf('%1$s %2$s', array(implode($separator, $dates->periods), $suffix)));
+    }
+
+    return $dates->start->format($format) ? : $elapsed->unknown;
+}
+
+function lgCustomNumberFormat( $num ) 
+{
+	if( $num >= 1000 )
+		$num = number_format( $num / 1000 ) . 'k' ;
+
+	return $num;
 }
 ?>

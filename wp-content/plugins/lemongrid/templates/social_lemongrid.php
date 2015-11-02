@@ -69,7 +69,7 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 						<div class=\'icon-wrap\'>
 							<span class=\'icon-likes lg-animate-fadein\'><i class=\'ion-android-favorite\'></i> '. $data['likes'] .'</span>
 							<span class=\'icon-comments lg-animate-fadein\'><i class=\'ion-android-textsms\'></i> '. $data['comments'] .'</span>
-							<span class=\'icon-time lg-animate-fadein\'><i class=\'ion-ios-calendar-outline\'></i> '. $data['time'] .'</span>
+							<span class=\'icon-time lg-animate-fadein\'><i class=\'ion-ios-clock\'></i> '. $data['time'] .'</span>
 						</div>
 					</div>';
 
