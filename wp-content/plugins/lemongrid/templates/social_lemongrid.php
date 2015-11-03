@@ -96,7 +96,7 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 	}
 endif;
 ?>
-<div class="lemongrid-wrap <?php esc_attr_e( $atts['elementID'] ); ?> lemongrid--element social-<?php esc_attr_e( $social ); ?> <?php esc_attr_e( $template_name ) ?> <?php esc_attr_e( $atts['class'] ); ?>">
+<div class="lemongrid-wrap <?php esc_attr_e( $atts['class_id'] ); ?> lemongrid--element social-<?php esc_attr_e( $social ); ?> <?php esc_attr_e( $template_name ) ?> <?php esc_attr_e( $atts['class'] ); ?>">
 	<?php echo apply_filters( 'lemongrid_toolbar_frontend', lgToolbarFrontend( array( 'atts' => $atts ) ), array() ); ?>
 	<?php echo apply_filters( 'lemongrid_before_content', '', array() ); ?>
 	<div class="lemongrid-inner grid-stack" data-lemongrid-options="<?php esc_attr_e( $lemongrid_options ); ?>">

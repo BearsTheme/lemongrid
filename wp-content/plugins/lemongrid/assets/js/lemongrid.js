@@ -227,9 +227,10 @@
 		$( saveLayoutElem, 'body' ).on( 'click', function( e ) {
 			e.preventDefault();
 			var lemonGridMap = getLemonGridSize( item.find( '.grid-stack > .grid-stack-item:visible' ) ),
-				grid_name = $( this ).data( 'grid-name' );
+				grid_elementid = $( this ).data( 'grid-elementid' );
 
-			self._request( 'lgApplyLemonGrid', { name: grid_name, gridMap: lemonGridMap }, lgSaveLemonGrid );
+			// self._request( 'lgApplyLemonGrid', { name: grid_name, gridMap: lemonGridMap }, lgSaveLemonGrid );
+			self._request( 'lgSaveLayoutLemonGrid', { elemID: grid_elementid, gridMap: lemonGridMap }, lgSaveLemonGrid );
 		} )
 
 		/**

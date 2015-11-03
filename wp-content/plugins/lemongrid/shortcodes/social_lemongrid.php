@@ -7,7 +7,7 @@ vc_map(
 	    'category' => __('LemonGrid Shortcodes', TB_NAME),
 	    'show_settings_on_create' => true,
 	    'params' => array(
-	    	/*array(
+	    	array(
 				'type' => 'el_id',
 				'param_name' => 'element_id',
 				'settings' => array(
@@ -16,7 +16,7 @@ vc_map(
 				'heading' => __( 'Element ID', TB_NAME ),
 				'description' => __( 'Enter element ID (Note: make sure it is unique and valid according to <a href="%s" target="_blank">w3c specification</a>).', TB_NAME ),
 				'group' => __( 'Source Settings', TB_NAME ),
-			),*/
+			),
 	    	array(
 	            'type' => 'dropdown',
 	            'heading' => __( 'Social', TB_NAME ),
@@ -89,7 +89,7 @@ class WPBakeryShortCode_social_lemongrid extends WPBakeryShortCode
 	protected function content( $atts, $content = null )
 	{ 
 		$atts = shortcode_atts( array(
-				// 'element_id'	=> '',
+				'element_id'	=> '',
 				'social' 		=> 'instagram',
 				'username'		=> '',
 				'api_key'		=> '', 
@@ -126,10 +126,10 @@ class WPBakeryShortCode_social_lemongrid extends WPBakeryShortCode
 		}
 		
 		$atts['media'] = ( isset( $media ) ) ? $media : array();
-		$atts['elementID'] = 'lemongrid_id' . rand( 1, (int) date( 'ymdhis' ) );
+		$atts['class_id'] = 'lemon_grid_id_' . $atts['element_id'];
 
 		wp_enqueue_style('tb-lemongrid-custom-script', TB_CSS . 'lemongrid-custom-script.css' );
-		wp_add_inline_style( 'tb-lemongrid-custom-script', renderGridCustomSpaceCss( $atts['elementID'], $atts['space'] ) );
+		wp_add_inline_style( 'tb-lemongrid-custom-script', renderGridCustomSpaceCss( $atts['class_id'], $atts['space'] ) );
 		
 		return lgLoadTemplate( $atts, $content );
 	}

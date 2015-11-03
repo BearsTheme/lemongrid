@@ -92,20 +92,21 @@ function lgToolbarFrontend( $params )
 		array(
 			'tag' => 'a',
 			'attrs' => array( 
-				'class' => 'lg-toolbar-icon lg-toolbar-icon--save-layout ' . ( empty( $params['atts']['grid_template'] ) ? 'lg-toolbar-icon-disable' : '' ), 
+				'class' => 'lg-toolbar-icon lg-toolbar-icon--save-layout ', 
 				'href' => '#', 
 				'title' => __( 'Save layout', TB_NAME ), 
-				'data-grid-name' => $params['atts']['grid_template'] ),
+				// 'data-grid-name' => $params['atts']['grid_template'], 
+				'data-grid-elementid' => $params['atts']['element_id'] ),
 			'content' => sprintf( '<i class=\'fa fa-floppy-o\'></i>' ),
 			),
-		array(
+		/*array(
 			'tag' => 'a',
 			'attrs' => array( 
 				'class' => 'lg-toolbar-icon lg-toolbar-icon--save-as-layout', 
 				'href' => '#', 
 				'title' => __( 'Save as layout', TB_NAME ) ),
 			'content' => sprintf( '<i class=\'ion-ios-grid-view\'></i>' ),
-			),
+			),*/
 		), $params );
 
 	$output = '';
@@ -157,6 +158,19 @@ function lgApplyLemonGrid()
 }
 add_action( 'wp_ajax_lgApplyLemonGrid', 'lgApplyLemonGrid' );
 add_action( 'wp_ajax_nopriv_lgApplyLemonGrid', 'lgApplyLemonGrid' );
+
+/**
+ * lgSaveLayoutLemonGrid
+ */
+function lgSaveLayoutLemonGrid()
+{
+	global $post;
+	print_r( $_POST );
+	echo $post->ID;
+	exit;
+}
+add_action( 'wp_ajax_lgSaveLayoutLemonGrid', 'lgSaveLayoutLemonGrid' );
+add_action( 'wp_ajax_nopriv_lgSaveLayoutLemonGrid', 'lgSaveLayoutLemonGrid' );
 
 /**
  * lgUpdateInfoFlickr
