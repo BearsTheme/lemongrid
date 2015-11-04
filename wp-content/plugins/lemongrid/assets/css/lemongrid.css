@@ -80,6 +80,23 @@
 	vertical-align: top;
 }
 
+.lg-handle-ajax{
+	position: relative;
+}
+
+.lg-handle-ajax:before{
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 99;
+	background: url( '../images/loader.gif' ) no-repeat, rgba(255,255,255,.8);
+	background-size: 120px;
+	background-position: center 100px;
+}
+
 /**
  * Confirm
  */
@@ -397,17 +414,4 @@
 .lemongrid-wrap.social_lemongrid .lemongrid-item:hover .lemongrid-info .lemongrid-description p{
 	transform: translateY(-120%);
 	-webkit-transform: translateY(-120%);
-}
-
-/**
- * Custom Grid Space
- */
- .lemongrid-wrap .grid-stack > .grid-stack-item > .ui-resizable-se{
-	bottom: 5px;
-	right: 5px;
-}
-
-.lemongrid-wrap .grid-stack > .grid-stack-item > .grid-stack-item-content{
-	left: 0px;
-  	right: 0px;
 }

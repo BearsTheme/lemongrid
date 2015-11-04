@@ -44,13 +44,13 @@ vc_map(
 	        	'group' => __( 'Source Settings', TB_NAME ),
 	        	'description' => __( 'Instagram: Client Id / Flickr: Key', TB_NAME )
 	        	),
-	        array(
+	        /* array(
 	        	'type' => 'lg_grid_template',
 	        	'heading' => __( 'Grid Template', TB_NAME ),
 	        	'param_name' => 'grid_template',
 	        	'value' => __( '', TB_NAME ),
 	        	'group' => __( 'Grid', TB_NAME ),
-	        	),
+	        	), */
 	        array(
 	        	'type' => 'textfield',
 	        	'heading' => __( 'Cell Height', TB_NAME ),
@@ -93,7 +93,7 @@ class WPBakeryShortCode_social_lemongrid extends WPBakeryShortCode
 				'social' 		=> 'instagram',
 				'username'		=> '',
 				'api_key'		=> '', 
-				'grid_template' => '',
+				// 'grid_template' => '',
 				'cell_height'	=> 120,
 				'space'			=> 20,
 				'template'		=> '',

@@ -14,10 +14,10 @@ $lemongrid_options = json_encode( array(
  * @return HTML
  */
 if( ! function_exists( 'itemSocialTemp' ) ) :
-	function itemSocialTemp( $datas, $gridName, $social )
+	function itemSocialTemp( $datas, $element_id, $social )
 	{
 		$output = '';
-		$gridLayout = lbGetLemonGridLayouts( $gridName );
+		$gridLayout = lgGetLayoutLemonGridPerPage( get_the_ID(), $element_id );
 		$grid = empty( $gridLayout ) ? lgRenderGridDefault( count( $datas ) ) : $gridLayout;
 
 		foreach( $datas as $k => $data ) :
@@ -50,7 +50,7 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 							<a href=\'#\' data-flickr=\''. json_encode( str_replace( "'", '&#39;', $data ) ) .'\' class=\'lemongrid-icon-picture\'><i class=\'fa fa-picture-o\'></i></a>
 							<a href=\''. $data['link'] .'\' target=\'_blank\' class=\'lemongrid-icon-link\'><i class=\'fa fa-link\'></i></a>
 						</div>
-						'. __( $description ) .'
+						'. $description .'
 					</div>';
 					break;
 				
@@ -79,7 +79,7 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 							<a href=\'#\' data-instagram=\''. json_encode( str_replace( "'", '&#39;', $data ) ) .'\' class=\'lemongrid-icon-picture\'><i class=\'fa fa-picture-o\'></i></a>
 							<a href=\''. $data['link'] .'\' target=\'_blank\' class=\'lemongrid-icon-link\'><i class=\'fa fa-link\'></i></a>
 						</div>
-						'. __( $description ) .'
+						'. $description .'
 					</div>';
 					break;
 			}
@@ -87,7 +87,7 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 			$output .= '
 				<div class=\'lemongrid-item lg-animate-fadein grid-stack-item\' data-gs-x=\''. esc_attr( $grid[$k]['x'] ) .'\' data-gs-y=\''. esc_attr( $grid[$k]['y'] ) .'\' data-gs-width=\''. esc_attr( $grid[$k]['w'] ) .'\' data-gs-height=\''. esc_attr( $grid[$k]['h'] ) .'\'>
 					<div class=\'grid-stack-item-content\' style=\''. esc_attr( $style ) .'\'>
-						'. __( $info ) .'
+						'. $info .'
 					</div>
 				</div>';
 		endforeach;
@@ -102,7 +102,7 @@ endif;
 	<div class="lemongrid-inner grid-stack" data-lemongrid-options="<?php esc_attr_e( $lemongrid_options ); ?>">
 		<?php 
 		if( is_array( $atts['media'] ) && count( $atts['media'] ) > 0 ) :
-			_e( call_user_func( 'itemSocialTemp', $atts['media'], $atts['grid_template'], $social ) );
+			_e( call_user_func( 'itemSocialTemp', $atts['media'], $atts['element_id'], $social ) );
 		else :
 			_e( '...', TB_NAME );
 		endif;

@@ -227,10 +227,11 @@
 		$( saveLayoutElem, 'body' ).on( 'click', function( e ) {
 			e.preventDefault();
 			var lemonGridMap = getLemonGridSize( item.find( '.grid-stack > .grid-stack-item:visible' ) ),
-				grid_elementid = $( this ).data( 'grid-elementid' );
+				grid_elementid = $( this ).data( 'grid-elementid' ),
+				page_id = $( this ).data( 'pageid' );
 
 			// self._request( 'lgApplyLemonGrid', { name: grid_name, gridMap: lemonGridMap }, lgSaveLemonGrid );
-			self._request( 'lgSaveLayoutLemonGrid', { elemID: grid_elementid, gridMap: lemonGridMap }, lgSaveLemonGrid );
+			self._request( 'lgSaveLayoutLemonGrid', { pageID: page_id,  elemID: grid_elementid, gridMap: lemonGridMap }, lgSaveLemonGrid );
 		} )
 
 		/**
@@ -256,6 +257,8 @@
 		 * Set action
 		 */
 		data.action = task;
+		var wrapElement = $( '.lemon_grid_id_' + data.elemID );
+		wrapElement.addClass( 'lg-handle-ajax' );
 
 		/**
 		 * Ajax handle
@@ -265,6 +268,7 @@
 			url: lemongridObj.ajaxurl,
 			data: data,
 			success: function( result ) {
+				wrapElement.removeClass( 'lg-handle-ajax' );
 				callback.call( this, result );
 			}
 		} )
@@ -317,6 +321,13 @@
 			}
 
 			gridStack.gridstack( options );
+
+			gridStack.on('resize', function (event, ui) {
+			    var grid = this;
+			    var element = event.target;
+			    ui.originalPosition.left = ui.originalPosition.left - 40;
+			    // console.log( ui );
+			});
 
 			self._scrollAnimateFadeIn( lemonItem );
 			self._toolbarHandle( lemonItem );

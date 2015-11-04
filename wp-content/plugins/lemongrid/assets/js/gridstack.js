@@ -477,7 +477,7 @@
             this.opts.vertical_margin);
 
         this.on_resize_handler = function() {
-            if (self._is_one_column_mode()) {
+            if (self._is_one_column_mode()) { 
                 if (one_column_mode)
                     return;
 
@@ -498,7 +498,7 @@
                     }
                 });
             }
-            else {
+            else { 
                 if (!one_column_mode)
                     return;
 
@@ -893,7 +893,7 @@
             width = (width != null && typeof width != 'undefined') ? width : node.width;
             height = (height != null && typeof height != 'undefined') ? height : node.height;
 
-            this.grid.move_node(node, node.x, node.y, width, height);
+            this.grid.move_node(node, node.x, node.y, width - 20, height);
         });
     };
 

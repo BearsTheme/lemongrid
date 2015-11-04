@@ -96,7 +96,8 @@ function lgToolbarFrontend( $params )
 				'href' => '#', 
 				'title' => __( 'Save layout', TB_NAME ), 
 				// 'data-grid-name' => $params['atts']['grid_template'], 
-				'data-grid-elementid' => $params['atts']['element_id'] ),
+				'data-grid-elementid' => $params['atts']['element_id'],
+				'data-pageid' => get_the_ID() ),
 			'content' => sprintf( '<i class=\'fa fa-floppy-o\'></i>' ),
 			),
 		/*array(
@@ -164,13 +165,42 @@ add_action( 'wp_ajax_nopriv_lgApplyLemonGrid', 'lgApplyLemonGrid' );
  */
 function lgSaveLayoutLemonGrid()
 {
-	global $post;
-	print_r( $_POST );
-	echo $post->ID;
+	$lgMetaData = lgGetLayoutLemonGridPerPage( $_POST['pageID'] );
+	$lgMetaData[$_POST['elemID']] = $_POST['gridMap'];
+
+	update_post_meta( $_POST['pageID'], '_lemongrid_meta_post', json_encode( $lgMetaData ) );
 	exit;
 }
 add_action( 'wp_ajax_lgSaveLayoutLemonGrid', 'lgSaveLayoutLemonGrid' );
 add_action( 'wp_ajax_nopriv_lgSaveLayoutLemonGrid', 'lgSaveLayoutLemonGrid' );
+
+/**
+ * lgGetLayoutLemonGridPerPage
+ *
+ * @param int $pageID
+ * @param int $gridID
+ *
+ * @return array
+ */
+function lgGetLayoutLemonGridPerPage( $pageID, $gridID = '' ) 
+{	
+	$lemongrid_meta_post = get_post_meta( $pageID, '_lemongrid_meta_post', json_encode( array() ) );
+
+	/**
+	 * Check exist $lemongrid_meta_post
+	 */
+	if( $lemongrid_meta_post == 'null' ) return array();
+
+	$lgData = json_decode( $lemongrid_meta_post, true );
+
+	/**
+	 * Check exist $gridID
+	 */
+	if( empty( $gridID ) ) return $lgData;
+
+	if( isset( $lgData[$gridID] ) ) return $lgData[$gridID];
+	else return;
+}
 
 /**
  * lgUpdateInfoFlickr
@@ -202,10 +232,17 @@ function renderGridCustomSpaceCss( $contentID, $space = 0 )
 		'58%', '66.66666667%', '75%', '83.33333333%', '91.66666667%', '100%',
 		);
 
+	$output .= sprintf( '.lemongrid-wrap.%s .grid-stack .grid-stack-placeholder > .placeholder-content{ left: 0; right: 0; transform: translateX(%spx); -webkit-transform: translateX(%spx); }', $contentID, $space, $space );
+	$output .= sprintf( '.lemongrid-wrap.%s .grid-stack > .grid-stack-item{ min-width: calc( %s - %spx ); }', $contentID, '8.33333%', $space );
+	$output .= sprintf( '.lemongrid-wrap.%s .grid-stack > .grid-stack-item > .ui-resizable-se{ bottom: 5px; right: 5px; }', $contentID );
+	$output .= sprintf( '.lemongrid-wrap.%s .grid-stack > .grid-stack-item > .grid-stack-item-content{ left: 0px; right: 0px; }', $contentID );
 	$output .= sprintf( '.lemongrid-wrap.%s .lemongrid-inner{ margin-left: -%spx; }', $contentID, $space );
 	$output .= sprintf( '.lemongrid-wrap.%s .lemongrid-inner .lemongrid-item{ margin: 0 0 20px %spx; }', $contentID, $space );
 	foreach( $gridWidth as $k => $itemWidth ) :
 		$output .= sprintf( '.lemongrid-wrap.%s .grid-stack > .grid-stack-item[data-gs-width=\'%s\'] {width: calc( %s - %spx );}', $contentID, $k + 1, $itemWidth, $space );
+		$output .= sprintf( '.lemongrid-wrap.%s .grid-stack > .grid-stack-item[data-gs-min-width=\'%s\'] {min-width: calc( %s - %spx );}', $contentID, $k + 1, $itemWidth, $space );
+		$output .= sprintf( '.lemongrid-wrap.%s .grid-stack > .grid-stack-item[data-gs-max-width=\'%s\'] {max-width: calc( %s - %spx );}', $contentID, $k + 1, $itemWidth, $space );
+		// $output .= sprintf( '.lemongrid-wrap.%s .grid-stack > .grid-stack-item[data-gs-x=\'%s\'] {left: calc( %s + %spx );}', $contentID, $k + 1, $itemWidth, $space );
 	endforeach;
 
 	return $output;
@@ -272,3 +309,4 @@ function lgCustomNumberFormat( $num )
 	return $num;
 }
 ?>
+
