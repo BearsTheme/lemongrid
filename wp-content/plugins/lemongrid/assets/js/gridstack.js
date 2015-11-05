@@ -640,7 +640,12 @@
             var o = $(this);
             self.grid.clean_nodes();
             self.grid.begin_update(node);
-            cell_width = Math.ceil(o.outerWidth() / o.attr('data-gs-width'));
+            
+            /* BEARS Theme fixed */
+            // cell_width = Math.ceil(o.outerWidth() / o.attr('data-gs-width'));
+            cell_width = Math.ceil( (o.outerWidth() + self.opts.vertical_margin) / o.attr('data-gs-width'));
+            /* END */
+
             cell_height = self.opts.cell_height + self.opts.vertical_margin;
             self.placeholder
                 .attr('data-gs-x', o.attr('data-gs-x'))
@@ -681,7 +686,7 @@
                 if (!self.grid.can_move_node(node, x, y, node.width, node.height)) {
                     return;
                 }
-                
+
                 self.grid.move_node(node, x, y);
                 self._update_container_height();
             },
@@ -695,10 +700,10 @@
                     width = Math.round(ui.size.width / cell_width),
                     height = Math.round(ui.size.height / cell_height); 
 
-                // console.log( ui.position.left, ui.size.width, cell_width );
                 if (!self.grid.can_move_node(node, x, y, width, height)) {
                     return;
                 }
+
                 self.grid.move_node(node, x, y, width, height);
                 self._update_container_height();
             }
