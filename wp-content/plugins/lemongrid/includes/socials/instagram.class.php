@@ -64,7 +64,7 @@ class LG_Instagram
                 );
 
                 if( $data['type'] == 'video' )
-                	$data_item['videos'] = $data['videos'];
+                	$data_item['video'] = $data['videos']['standard_resolution']['url'];
 
             	array_push( $instagram, $data_item );
             }

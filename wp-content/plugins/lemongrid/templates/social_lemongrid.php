@@ -59,7 +59,7 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 					/* description */
 					$description = ( isset( $data['description'] ) && ! empty( $data['description'] ) ) 
 						? '<div class=\'lemongrid-description\'><p>'. esc_attr( wp_trim_words( $data['description'], 7, $more = '...' ) ) .'</p></div>' 
-						: '';
+						: '';	
 
 					/* Detail modal */
 					$data['detail_modal'] = '
@@ -73,10 +73,12 @@ if( ! function_exists( 'itemSocialTemp' ) ) :
 						</div>
 					</div>';
 
+					$icon_class = ( 'video' == $data['type'] ) ? 'fa-play' : 'fa-picture-o';
+
 					$info .= '
 					<div class=\'lemongrid-info\'>
 						<div class=\'lemongrid-icon\'>
-							<a href=\'#\' data-instagram=\''. json_encode( str_replace( "'", '&#39;', $data ) ) .'\' class=\'lemongrid-icon-picture\'><i class=\'fa fa-picture-o\'></i></a>
+							<a href=\'#\' data-instagram=\''. json_encode( str_replace( "'", '&#39;', $data ) ) .'\' class=\'lemongrid-icon-picture\'><i class=\'fa '. $icon_class .'\'></i></a>
 							<a href=\''. $data['link'] .'\' target=\'_blank\' class=\'lemongrid-icon-link\'><i class=\'fa fa-link\'></i></a>
 						</div>
 						'. $description .'

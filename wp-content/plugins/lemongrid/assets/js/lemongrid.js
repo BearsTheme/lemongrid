@@ -99,6 +99,7 @@
 	 * DynamicsModal
 	 */
 	$.lgDynamicsModalPhoto = function( opts, callback ) {
+		this.opts = opts;
 		this.content = $( '<div>', {
 			class: 'lg-dynamics-modal-wrap',
 			html: '<a href=\'#\' class=\'lg-dynamics-modal-close\'><i class=\'ion-ios-close-empty\'></i></a><div class=\'lg-dynamics-modal-inner\'><div class=\'lg-dynamics-modal-image\'><img src=\''+ opts.photo +'\'/></div><div class=\'lg-dynamics-modal-detail\'>'+ opts.detail +'</div></div>',
@@ -141,6 +142,8 @@
 				lgAnimFaceIn( self.detailWrap.find( '.lg-animate-fadein' ) );
 			}, 300 )
 		}
+
+		callback.call( this, this );
 
 		return this;
 	}
@@ -387,14 +390,33 @@
 			$( '.lg-dynamics-modal-wrap' ).trigger( 'close' );
 		}
 
-		var modal = new $.lgDynamicsModalPhoto( {
-			photo: data.photo,
-			detail: data.detail_modal,
-		} );
+		var params = { photo: data.photo, detail: data.detail_modal };
+
+		/**
+		 * Check video exist
+		 */
+		if( data.video ) params.video = data.video;
+
+		var modal = new $.lgDynamicsModalPhoto( params, instagramAfterModalOpen );
 
 		modal.content.find( '.lg-dynamics-modal-detail' ).prepend( next_prev_wrap );
 
 		return modal;
+	}
+
+	/**
+	 * instagramAfterModalOpen
+	 */
+	function instagramAfterModalOpen( modal ) {
+		if( ! modal.opts.video ) return;
+
+		var video = $( '<video>', {
+				class: 'lg-video lg-ins-video',
+				controls: true,
+				html: '<source src="'+ modal.opts.video +'" type="video/mp4" />',
+			} )
+
+		modal.imgWrap.append( video );
 	}
 
 	/**

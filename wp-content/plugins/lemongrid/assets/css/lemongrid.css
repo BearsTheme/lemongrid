@@ -229,6 +229,14 @@
 	-webkit-transform: translateY(-100%);
 }
 
+.lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-image .lg-ins-video{
+	height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
 .lg-dynamics-modal-wrap .lg-dynamics-modal-inner .lg-dynamics-modal-image img{
 	object-fit: contain;
 	height: 100%;
