@@ -676,10 +676,12 @@
             stop: on_end_moving,
             drag: function(event, ui) {
                 var x = Math.round(ui.position.left / cell_width),
-                    y = Math.floor((ui.position.top + cell_height / 2) / cell_height);
+                    y = Math.floor((ui.position.top + cell_height / 2) / cell_height); 
+
                 if (!self.grid.can_move_node(node, x, y, node.width, node.height)) {
                     return;
                 }
+                
                 self.grid.move_node(node, x, y);
                 self._update_container_height();
             },
@@ -691,7 +693,9 @@
                 var x = Math.round(ui.position.left / cell_width),
                     y = Math.floor((ui.position.top + cell_height / 2) / cell_height),
                     width = Math.round(ui.size.width / cell_width),
-                    height = Math.round(ui.size.height / cell_height);
+                    height = Math.round(ui.size.height / cell_height); 
+
+                // console.log( ui.position.left, ui.size.width, cell_width );
                 if (!self.grid.can_move_node(node, x, y, width, height)) {
                     return;
                 }

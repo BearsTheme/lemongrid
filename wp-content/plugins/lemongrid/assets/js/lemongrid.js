@@ -325,8 +325,6 @@
 			gridStack.on('resize', function (event, ui) {
 			    var grid = this;
 			    var element = event.target;
-			    ui.originalPosition.left = ui.originalPosition.left - 40;
-			    // console.log( ui );
 			});
 
 			self._scrollAnimateFadeIn( lemonItem );
