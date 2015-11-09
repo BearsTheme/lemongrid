@@ -16,7 +16,7 @@ vc_map(
 				'heading' => __( 'Element ID', TB_NAME ),
 				'description' => __( 'Enter element ID (Note: make sure it is unique and valid according to <a href="%s" target="_blank">w3c specification</a>).', TB_NAME ),
 				'group' => __( 'Source Settings', TB_NAME ),
-			),
+				),
 	    	array(
 	            'type' => 'dropdown',
 	            'heading' => __( 'Social', TB_NAME ),

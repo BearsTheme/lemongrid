@@ -75,7 +75,7 @@ class LemonGrid
 		 * Lib JS Gridstack
 		 */
 		wp_register_script( 'gridstack', TB_JS . 'gridstack.js', array( 'jquery', 'lodash' ) );
-		wp_register_style('gridstack', TB_CSS . 'gridstack.css', array(), '1.0');
+		wp_register_style( 'gridstack', TB_CSS . 'gridstack.css', array(), '1.0' );
 
 		/**
 		 * Lib JS Dynamics
@@ -85,14 +85,14 @@ class LemonGrid
 		/**
 		 * Lib ICON 
 		 */
-		wp_register_style('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', array(), '1.0');
-		wp_register_style('ionicon', TB_CSS . 'ionicons.min.css', array(), '1.0');
+		wp_register_style( 'font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', array(), '1.0' );
+		wp_register_style( 'ionicon', TB_CSS . 'ionicons.min.css', array(), '1.0' );
 
 		/**
 		 * Script LemonGrid
 		 */
 		wp_register_script( 'tb-lemongrid-script', TB_JS . 'lemongrid.js', array( 'jquery', 'gridstack' ) );
-		wp_register_style('tb-lemongrid-script', TB_CSS . 'lemongrid.css', array(), '1.0');
+		wp_register_style( 'tb-lemongrid-script', TB_CSS . 'lemongrid.css', array(), '1.0' );
 	}
 
 	/**

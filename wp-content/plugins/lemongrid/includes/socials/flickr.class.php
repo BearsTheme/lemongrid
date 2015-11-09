@@ -90,6 +90,10 @@ class LG_Flickr
 		$get = wp_remote_get( $uri_request );
 
 		$data = json_decode( $get['body'] );
+		
+		$data->photo->isfavorite = lgCustomNumberFormat( $data->photo->isfavorite );
+		$data->photo->comments->_content = lgCustomNumberFormat( $data->photo->comments->_content );
+		$data->photo->dateuploaded = lgElapsedTimeString( date( 'Y-m-d H:i:s', $data->photo->dateuploaded ) );
 
 		return $data;
 	}

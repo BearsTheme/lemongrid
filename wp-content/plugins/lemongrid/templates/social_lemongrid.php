@@ -8,13 +8,13 @@ $lemongrid_options = json_encode( array(
 	'animate'			=> true,
 	) );
 /**
- * instagramSocialTemp
+ * lgItemSocialTemp
  *
  * @param array $data
  * @return HTML
  */
-if( ! function_exists( 'itemSocialTemp' ) ) :
-	function itemSocialTemp( $datas, $element_id, $social )
+if( ! function_exists( 'lgItemSocialTemp' ) ) :
+	function lgItemSocialTemp( $datas, $element_id, $social )
 	{
 		$output = '';
 		$gridLayout = lgGetLayoutLemonGridPerPage( get_the_ID(), $element_id );
@@ -104,7 +104,7 @@ endif;
 	<div class="lemongrid-inner grid-stack" data-lemongrid-options="<?php esc_attr_e( $lemongrid_options ); ?>">
 		<?php 
 		if( is_array( $atts['media'] ) && count( $atts['media'] ) > 0 ) :
-			_e( call_user_func( 'itemSocialTemp', $atts['media'], $atts['element_id'], $social ) );
+			_e( call_user_func( 'lgItemSocialTemp', $atts['media'], $atts['element_id'], $social ) );
 		else :
 			_e( '...', TB_NAME );
 		endif;

@@ -8,52 +8,29 @@ $lemongrid_options = json_encode( array(
 	) );
 
 /**
- * lgItemPostTemp
+ * itemGalleryTemp
  *
  * @param array $atts
  * @return HTML
  */
-if( ! class_exists( 'lgItemPostTemp' ) ) :
-	function lgItemPostTemp( $atts )
+if( ! function_exists( 'lgItemGalleryTemp' ) ) :
+	function itemGalleryTemp( $atts )
 	{
 		$output = '';
+		$images = explode( ',', $atts['images'] );
 		$gridLayout = lgGetLayoutLemonGridPerPage( get_the_ID(), $atts['element_id'] );
-		$grid = empty( $gridLayout ) ? lgRenderGridDefault( count( $atts['posts']->posts ) ) : $gridLayout;
-		$posts = $atts['posts'];
-		$k = 0;
+		$grid = empty( $gridLayout ) ? lgRenderGridDefault( count( $images ) ) : $gridLayout;
 
-		while( $posts->have_posts() ) : 
-			$posts->the_post();
-
-			if( has_post_thumbnail() ):
-                $thumbnail_data = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' );
-            	$thumbnail = $thumbnail_data[0];
-            else:
-                $thumbnail = '';
-            endif;
+		foreach( $images as $k => $image_id ) :
+			$data_img = wp_get_attachment_image_src( $image_id, 'full' );
 			$style = implode( ';', array( 
-				"background: url({$thumbnail}) no-repeat center center / cover, #FFF", 
+				"background: url({$data_img[0]}) no-repeat center center / cover, #FFF", 
 				) );
-
-			/**
-			 * Title
-			 */
-			$_title = '<h2 class=\'title\'>'. get_the_title() .'</h2>';
-
-			/**
-			 * Data
-			 */
-			$_date = '<p class=\'date\'>'. get_the_date( 'M d Y' ) .'</p>';
 
 			$info = '
 			<div class=\'lemongrid-info\'>
 				<div class=\'lemongrid-icon\'>
-					<a href=\'#\'><i class=\'fa fa-expand\'></i></a>
-					<a href=\'#\'><i class=\'fa fa-link\'></i></a>
-				</div>
-				<div class=\'info-text\'>
-					'. $_title .'
-					'. $_date .'
+					<a href=\''. $data_img[0] .'\' data-imagelightbox=\''. $atts['element_id'] .'\'><i class=\'fa fa-expand\'></i></a>
 				</div>
 			</div>';
 
@@ -63,11 +40,7 @@ if( ! class_exists( 'lgItemPostTemp' ) ) :
 						'. $info .'
 					</div>
 				</div>';
-
-			$k += 1;
-		endwhile;
-
-		wp_reset_postdata();
+		endforeach;
 
 		return $output;
 	}
@@ -78,8 +51,8 @@ endif;
 	<?php echo apply_filters( 'lemongrid_before_content', '', array() ); ?>
 	<div class="lemongrid-inner grid-stack" data-lemongrid-options="<?php esc_attr_e( $lemongrid_options ); ?>">
 		<?php 
-		if( isset( $atts['posts']->posts ) && ( count( $atts['posts']->posts ) > 0 ) ) :
-			_e( call_user_func( 'lgItemPostTemp', $atts ) );
+		if( ! empty( $atts['images'] ) ) :
+			_e( call_user_func( 'lgItemGalleryTemp', $atts ) );
 		else :
 			_e( '...', TB_NAME );
 		endif;

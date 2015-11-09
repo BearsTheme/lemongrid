@@ -122,7 +122,7 @@
 		 */
 		this.modalInner = this.content.find( '.lg-dynamics-modal-inner' );
 		this.imgWrap 	= this.content.find( '.lg-dynamics-modal-image' );
-		this.detailWrap 	= this.content.find( '.lg-dynamics-modal-detail' );
+		this.detailWrap = this.content.find( '.lg-dynamics-modal-detail' );
 		this.closeBtn 	= this.content.find( '.lg-dynamics-modal-close' );
 
 		dynamics.animate( this.content[0], {
@@ -143,7 +143,11 @@
 			}, 300 )
 		}
 
-		callback.call( this, this );
+		/**
+		 * Check exist callback
+		 */
+		if( callback )
+			callback.call( this, this );
 
 		return this;
 	}
@@ -460,7 +464,7 @@
 				/**
 				 * icon
 				 */
-				var favorite = obj.photo.isfavorite, comment = obj.photo.comments._content, date = obj.photo.dates.posted;
+				var favorite = obj.photo.isfavorite, comment = obj.photo.comments._content, date = obj.photo.dateuploaded;
 				var $favorite = $( '<span>', { class: 'icon-likes lg-after-animate', html: '<i class=\'ion-android-favorite\'></i>' + favorite } );
 				var $comment = $( '<span>', { class: 'icon-comments lg-after-animate', html: '<i class=\'ion-android-textsms\'></i>' + comment } );
 				var $date = $( '<span>', { class: 'icon-time lg-after-animate', html: '<i class=\'ion-ios-clock\'></i>' + date } );
@@ -505,6 +509,32 @@
 
 			var modal = flickrCallModal( $thisEl, index );
 		} )
+
+		/**
+		 * Image Lightbox
+		 */
+		var imagelightboxEl = $( '[data-imagelightbox]' ),
+		activityIndicatorOn = function() {
+			$( '<div id="imagelightbox-loading"><div></div></div>' ).appendTo( 'body' );
+		},
+		activityIndicatorOff = function() {
+			$( '#imagelightbox-loading' ).remove();
+		},
+		overlayOn = function() {
+			$( '<div id="imagelightbox-overlay"></div>' ).appendTo( 'body' );
+		},
+		overlayOff = function() {
+			$( '#imagelightbox-overlay' ).remove();
+		};
+
+		if( imagelightboxEl.length > 0 ) {
+			imagelightboxEl.imageLightbox( {
+				onStart: 	 function() { overlayOn(); },
+				onEnd:	 	 function() { overlayOff(); activityIndicatorOff(); },
+				onLoadStart: function() { activityIndicatorOn(); },
+				onLoadEnd:	 function() { activityIndicatorOff(); }
+			} );
+		}
 
 	} )
 } )( jQuery )
