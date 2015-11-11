@@ -32,28 +32,38 @@ if( ! class_exists( 'lgItemPostTemp' ) ) :
                 $thumbnail = '';
             endif;
 			$style = implode( ';', array( 
-				"background: url({$thumbnail}) no-repeat center center / cover, #FFF", 
+				"background: url({$thumbnail}) no-repeat center center / cover, #333", 
 				) );
 
 			/**
 			 * Title
 			 */
-			$_title = '<h2 class=\'title\'>'. get_the_title() .'</h2>';
+			$_title = '<h2 class=\'title\' title=\''. get_the_title() .'\'>'. get_the_title() .'</h2>';
 
 			/**
 			 * Data
 			 */
 			$_date = '<p class=\'date\'>'. get_the_date( 'M d Y' ) .'</p>';
 
+			/**
+			 * Icon Comment & Author
+			 */
+			$comments_count = wp_count_comments( get_the_ID() );
+			$_comment_author = '
+				<div class=\'comment-author\'>
+					<span class=\'comment\'><i class=\'ion-android-chat\'></i> '. $comments_count->total_comments .'</span>
+					<span class=\'author\'><i class=\'ion-person\'></i> '. get_the_author() .'</span>
+				</div>';
+
 			$info = '
 			<div class=\'lemongrid-info\'>
 				<div class=\'lemongrid-icon\'>
-					<a href=\'#\'><i class=\'fa fa-expand\'></i></a>
-					<a href=\'#\'><i class=\'fa fa-link\'></i></a>
+					<a href=\''. get_permalink() .'\'><i class=\'fa fa-link\'></i></a>
 				</div>
 				<div class=\'info-text\'>
 					'. $_title .'
 					'. $_date .'
+					'. $_comment_author .'
 				</div>
 			</div>';
 

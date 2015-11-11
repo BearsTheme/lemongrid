@@ -8,13 +8,13 @@ $lemongrid_options = json_encode( array(
 	) );
 
 /**
- * itemGalleryTemp
+ * lgItemGalleryTemp
  *
  * @param array $atts
  * @return HTML
  */
 if( ! function_exists( 'lgItemGalleryTemp' ) ) :
-	function itemGalleryTemp( $atts )
+	function lgItemGalleryTemp( $atts )
 	{
 		$output = '';
 		$images = explode( ',', $atts['images'] );
@@ -24,7 +24,7 @@ if( ! function_exists( 'lgItemGalleryTemp' ) ) :
 		foreach( $images as $k => $image_id ) :
 			$data_img = wp_get_attachment_image_src( $image_id, 'full' );
 			$style = implode( ';', array( 
-				"background: url({$data_img[0]}) no-repeat center center / cover, #FFF", 
+				"background: url({$data_img[0]}) no-repeat center center / cover, #333", 
 				) );
 
 			$info = '

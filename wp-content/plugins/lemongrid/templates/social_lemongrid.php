@@ -22,7 +22,7 @@ if( ! function_exists( 'lgItemSocialTemp' ) ) :
 
 		foreach( $datas as $k => $data ) :
 			$style = implode( ';', array( 
-				"background: url({$data['photo']}) no-repeat center center / cover, #FFF", 
+				"background: url({$data['photo']}) no-repeat center center / cover, #333", 
 				) );
 
 			$info = '';
