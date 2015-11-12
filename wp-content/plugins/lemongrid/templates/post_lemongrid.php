@@ -58,7 +58,7 @@ if( ! class_exists( 'lgItemPostTemp' ) ) :
 			$info = '
 			<div class=\'lemongrid-info\'>
 				<div class=\'lemongrid-icon\'>
-					<a href=\''. get_permalink() .'\'><i class=\'fa fa-link\'></i></a>
+					<a title=\''. get_the_title() .'\' href=\''. get_permalink() .'\'><i class=\'fa fa-link\'></i></a>
 				</div>
 				<div class=\'info-text\'>
 					'. $_title .'

@@ -394,6 +394,8 @@
 			$( '.lg-dynamics-modal-wrap' ).trigger( 'close' );
 		}
 
+		if( $elem.length <= 0 ) return;
+
 		var params = { photo: data.photo, detail: data.detail_modal };
 
 		/**
@@ -433,6 +435,8 @@
 		if( $( '.lg-dynamics-modal-wrap' ).length > 0 ) {
 			$( '.lg-dynamics-modal-wrap' ).trigger( 'close' );
 		}
+
+		if( $elem.length <= 0 ) return;
 
 		var modal = new $.lgDynamicsModalPhoto( {
 			photo: data.photo,

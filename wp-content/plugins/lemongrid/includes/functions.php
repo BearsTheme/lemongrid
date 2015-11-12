@@ -308,5 +308,3 @@ function lgCustomNumberFormat( $num )
 
 	return $num;
 }
-?>
-
