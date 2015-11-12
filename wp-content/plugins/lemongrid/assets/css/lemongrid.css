@@ -320,7 +320,7 @@
 .lemongrid-wrap.social_lemongrid{
 }
 
-.lemongrid-wrap.social_lemongrid .lemongrid-item{
+.lemongrid-wrap .lemongrid-item{
 	cursor: pointer; /* fix touch hover */
 }
 
