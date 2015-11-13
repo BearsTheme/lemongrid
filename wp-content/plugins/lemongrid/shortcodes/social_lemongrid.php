@@ -44,6 +44,14 @@ vc_map(
 	        	'group' => __( 'Source Settings', TB_NAME ),
 	        	'description' => __( 'Instagram: Client Id / Flickr: Key', TB_NAME )
 	        	),
+	    	array(
+	        	'type' => 'textfield',
+	        	'heading' => __( 'Count', TB_NAME ),
+	        	'param_name' => 'count',
+	        	'value' => 9,
+	        	'group' => __( 'Source Settings', TB_NAME ),
+	        	'description' => __( 'Default: 9 items', TB_NAME )
+	        	),
 	        /* array(
 	        	'type' => 'lg_grid_template',
 	        	'heading' => __( 'Grid Template', TB_NAME ),
@@ -93,7 +101,7 @@ class WPBakeryShortCode_social_lemongrid extends WPBakeryShortCode
 				'social' 		=> 'instagram',
 				'username'		=> '',
 				'api_key'		=> '', 
-				// 'grid_template' => '',
+				'count' 		=> 9,
 				'cell_height'	=> 120,
 				'space'			=> 20,
 				'template'		=> '',
@@ -114,6 +122,7 @@ class WPBakeryShortCode_social_lemongrid extends WPBakeryShortCode
 				$insta = new LG_Instagram();
 				$insta->username = $atts['username'];
 				$insta->client_id = $atts['api_key']; // '2a87113cbe65405aa10b491fc6e39242';
+				$insta->slice = (int) $atts['count'];
 				$media = $insta->getMedia();
 				break;
 			case 'flickr':
@@ -121,6 +130,7 @@ class WPBakeryShortCode_social_lemongrid extends WPBakeryShortCode
 				$flickr = new LG_Flickr();
 				$flickr->username = $atts['username'];
 				$flickr->key = $atts['api_key']; // 'f668d07759169ca3db29e9a60bff128d';
+				$flickr->slice = (int) $atts['count'];
 				$media = $flickr->getMedia();
 				break;
 		}
