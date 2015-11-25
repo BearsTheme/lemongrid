@@ -17,8 +17,8 @@ if( ! class_exists( 'lgItemPostTemp' ) ) :
 	function lgItemPostTemp( $atts )
 	{
 		$output = '';
-		$gridLayout = lgGetLayoutLemonGridPerPage( get_the_ID(), $atts['element_id'] );
-		$grid = empty( $gridLayout ) ? lgRenderGridDefault( count( $atts['posts']->posts ) ) : $gridLayout;
+		// $grid = lgGetLayoutLemonGridPerPage( get_the_ID(), $atts['element_id'], count( $atts['posts']->posts ) );
+		$grid = lbGetLemonGridLayouts( $atts['element_id'], count( $atts['posts']->posts ) ); /* v1.1 */
 		$posts = $atts['posts'];
 		$k = 0;
 

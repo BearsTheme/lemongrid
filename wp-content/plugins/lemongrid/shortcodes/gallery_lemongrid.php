@@ -88,6 +88,3 @@ class WPBakeryShortCode_gallery_lemongrid extends WPBakeryShortCode
 		return lgLoadTemplate( $atts, $content );
 	}
 }
-?>
-
-

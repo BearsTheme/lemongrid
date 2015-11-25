@@ -126,4 +126,3 @@ class LG_Flickr
         return ( $data->user->id ) ? array( 'user_id' => $data->user->id, 'username' => $data->user->username->_content ) : array();
 	}
 }
-?>

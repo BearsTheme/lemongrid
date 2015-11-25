@@ -1,5 +1,5 @@
 <?php
-add_shortcode_param('lg_template', 'lgShortcodeTemplate');
+vc_add_shortcode_param('lg_template', 'lgShortcodeTemplate');
 
 function lgShortcodeTemplate( $settings, $value ) 
 {
@@ -21,4 +21,3 @@ function lgShortcodeTemplate( $settings, $value )
    
     return $output;
 }
-?>

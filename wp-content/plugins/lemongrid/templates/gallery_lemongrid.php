@@ -18,8 +18,8 @@ if( ! function_exists( 'lgItemGalleryTemp' ) ) :
 	{
 		$output = '';
 		$images = explode( ',', $atts['images'] );
-		$gridLayout = lgGetLayoutLemonGridPerPage( get_the_ID(), $atts['element_id'] );
-		$grid = empty( $gridLayout ) ? lgRenderGridDefault( count( $images ) ) : $gridLayout;
+		// $grid = lgGetLayoutLemonGridPerPage( get_the_ID(), $atts['element_id'], count( $images ) );
+		$grid = lbGetLemonGridLayouts( $atts['element_id'], count( $images ) ); /* v1.1 */
 
 		foreach( $images as $k => $image_id ) :
 			$data_img = wp_get_attachment_image_src( $image_id, 'full' );

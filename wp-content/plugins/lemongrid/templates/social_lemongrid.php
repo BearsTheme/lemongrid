@@ -14,13 +14,15 @@ $lemongrid_options = json_encode( array(
  * @return HTML
  */
 if( ! function_exists( 'lgItemSocialTemp' ) ) :
-	function lgItemSocialTemp( $datas, $element_id, $social )
+	function lgItemSocialTemp( $atts )
 	{
 		$output = '';
-		$gridLayout = lgGetLayoutLemonGridPerPage( get_the_ID(), $element_id );
-		$grid = empty( $gridLayout ) ? lgRenderGridDefault( count( $datas ) ) : $gridLayout;
+		$element_id = $atts['element_id'];
+		$social = $atts['social'];
+		// $grid = lgGetLayoutLemonGridPerPage( get_the_ID(), $element_id, count( $atts['media'] ) );
+		$grid = lbGetLemonGridLayouts( $atts['element_id'], count( $atts['media'] ) ); /* v1.1 */
 
-		foreach( $datas as $k => $data ) :
+		foreach( $atts['media'] as $k => $data ) :
 			$style = implode( ';', array( 
 				"background: url({$data['photo']}) no-repeat center center / cover, #333", 
 				) );
@@ -104,7 +106,7 @@ endif;
 	<div class="lemongrid-inner grid-stack" data-lemongrid-options="<?php esc_attr_e( $lemongrid_options ); ?>">
 		<?php 
 		if( is_array( $atts['media'] ) && count( $atts['media'] ) > 0 ) :
-			_e( call_user_func( 'lgItemSocialTemp', $atts['media'], $atts['element_id'], $social ) );
+			_e( call_user_func( 'lgItemSocialTemp', $atts ) );
 		else :
 			_e( '...', TB_NAME );
 		endif;

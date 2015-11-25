@@ -50,6 +50,27 @@ class LemonGrid
 		 * Visual Composer action
 		 */
 		add_action( 'vc_before_init', array( $this, 'shortcode' ) );
+
+		/**
+		 * Include widget
+		 */
+		$this->widget();
+
+		/**
+		 * admin_init_hook
+		 */
+		add_action( 'admin_init', array( $this, 'admin_init_hook' ) );
+	}
+
+	/**
+	 * admin_init_hook
+	 */
+	function admin_init_hook()
+	{
+		/* includes script backend */
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'tb-lemongrid-script-backend', TB_JS . 'lg_backend.js', array( 'jquery' ) );
+		
 	}
 
 	/**
@@ -58,6 +79,14 @@ class LemonGrid
 	function shortcode() 
 	{
 		require TB_INCLUDES . 'shortcode.php';
+	}
+
+	/**
+	 * widget
+	 */
+	function widget()
+	{
+		require TB_INCLUDES . 'widget.php';
 	}
 
 	/**

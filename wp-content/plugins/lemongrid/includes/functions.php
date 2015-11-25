@@ -54,6 +54,22 @@ function lgLoadTemplate( $atts, $content = null )
 }
 
 /**
+ * lg_widget_templates
+ */
+function lg_widget_templates()
+{
+	$prefix = 'widget';
+	$plg_dir_temp = TB_DIR . 'templates/';
+	$theme_dir_temp = get_template_directory() . '/lemongrid_templates/';
+	$reg = "/^({$prefix}\.php|{$prefix}--.*\.php)/";
+
+	$files = lgFileScanDirectory( $plg_dir_temp, $reg );
+	$files = array_merge( $files, lgFileScanDirectory( $theme_dir_temp, $reg ) );
+
+	return $files;
+}
+
+/**
  * renderGridDefault
  *
  * @param int $count
@@ -132,13 +148,43 @@ function lgToolbarFrontend( $params )
 /**
  * lbGetLemonGridLayouts
  */
-function lbGetLemonGridLayouts( $name = '' ) 
+function lbGetLemonGridLayouts( $name = '', $count = 0 ) 
 {
 	$lemongrid_grid_layouts = get_option( 'lemongrid_grid_layouts', json_encode( array() ) );
 	$layoutArr = json_decode( $lemongrid_grid_layouts, true );
 
 	if( ! empty( $name ) ) :
-		$result = isset( $layoutArr[$name] ) ? $layoutArr[$name] : array();
+		$result = isset( $layoutArr[$name] ) ? $layoutArr[$name] : lgRenderGridDefault( $count );
+
+		/**
+		 * NOTE: Need update next version
+		 */
+		if( $count > count( $result ) ) :
+			$_ceil = ceil( $count / count( $result ) );
+			$_source_result = $result;
+			$_high_y = 0;
+
+			/* Push more grid */
+			for( $i = 1; $i <= $_ceil; $i++ ) :
+
+				/* Set high y */
+				foreach( $result as $_g ) :
+					if( $_high_y < ( $_g['y'] + $_g['h'] ) ) 
+						$_high_y = $_g['y'] + $_g['h'] + 1;
+				endforeach;
+
+				/* Push item */
+				foreach( $_source_result as $_g ) :
+					array_push( $result, array(
+						'x' => $_g['x'], 
+						'y' => $_high_y + $_g['y'] * $i, 
+						'w' => $_g['w'], 
+						'h' => $_g['h'],
+					) );
+				endforeach;
+			endfor;
+		endif;
+
 	else :
 		$result = $layoutArr;
 	endif;
@@ -179,12 +225,14 @@ add_action( 'wp_ajax_nopriv_lgSaveLayoutLemonGrid', 'lgSaveLayoutLemonGrid' );
  *
  * @param int $pageID
  * @param int $gridID
+ * @param int $count (total item)
  *
  * @return array
  */
-function lgGetLayoutLemonGridPerPage( $pageID, $gridID = '' ) 
+function lgGetLayoutLemonGridPerPage( $pageID, $gridID = '', $count = 0 ) 
 {	
 	$lemongrid_meta_post = get_post_meta( $pageID, '_lemongrid_meta_post', json_encode( array() ) );
+	$result = '';
 
 	/**
 	 * Check exist $lemongrid_meta_post
@@ -198,8 +246,11 @@ function lgGetLayoutLemonGridPerPage( $pageID, $gridID = '' )
 	 */
 	if( empty( $gridID ) ) return $lgData;
 
-	if( isset( $lgData[$gridID] ) ) return $lgData[$gridID];
-	else return;
+	if( isset( $lgData[$gridID] ) ) :
+		return $lgData[$gridID];
+	else :
+		return lgRenderGridDefault( $count );
+	endif;
 }
 
 /**

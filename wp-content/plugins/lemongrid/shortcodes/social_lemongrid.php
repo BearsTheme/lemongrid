@@ -144,4 +144,3 @@ class WPBakeryShortCode_social_lemongrid extends WPBakeryShortCode
 		return lgLoadTemplate( $atts, $content );
 	}
 }
-?>

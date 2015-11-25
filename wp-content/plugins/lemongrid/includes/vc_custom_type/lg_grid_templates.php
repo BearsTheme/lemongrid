@@ -1,5 +1,5 @@
 <?php
-add_shortcode_param('lg_grid_template', 'lgShortcodeGridTemplate');
+vc_add_shortcode_param('lg_grid_template', 'lgShortcodeGridTemplate');
 
 function lgShortcodeGridTemplate( $settings, $value ) 
 {
@@ -19,4 +19,3 @@ function lgShortcodeGridTemplate( $settings, $value )
    
     return $output;
 }
-?>

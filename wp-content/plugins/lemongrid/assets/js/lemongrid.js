@@ -237,8 +237,8 @@
 				grid_elementid = $( this ).data( 'grid-elementid' ),
 				page_id = $( this ).data( 'pageid' );
 
-			// self._request( 'lgApplyLemonGrid', { name: grid_name, gridMap: lemonGridMap }, lgSaveLemonGrid );
-			self._request( 'lgSaveLayoutLemonGrid', { pageID: page_id,  elemID: grid_elementid, gridMap: lemonGridMap }, lgSaveLemonGrid );
+			self._request( 'lgApplyLemonGrid', { elemID: grid_elementid, name: grid_elementid, gridMap: lemonGridMap }, lgSaveLemonGrid );
+			// self._request( 'lgSaveLayoutLemonGrid', { pageID: page_id,  elemID: grid_elementid, gridMap: lemonGridMap }, lgSaveLemonGrid );
 		} )
 
 		/**
