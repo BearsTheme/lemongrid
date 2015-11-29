@@ -388,8 +388,9 @@ function lgGetComments( $filename )
 	/* build params */
 	if( count( $segments ) == 0 ) return;
 	foreach( $segments as $segment ) {
-		if( ! empty( trim( $segment ) ) ) {
-			$_arr = explode( ':', trim( $segment ), 2 );
+		$segment = trim( $segment );
+		if( ! empty( $segment ) ) { 
+			$_arr = explode( ':', $segment, 2 );
 			if( count( $_arr ) == 2 )
 				$params[strtolower( $_arr[0] )] = ltrim( $_arr[1] );
 		}
