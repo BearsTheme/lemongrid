@@ -75,6 +75,11 @@ class lemongrid_widget extends WP_Widget
 		$instance['class_id'] = 'lemon_grid_id_' . $instance['element_id'];
 
 		/**
+		 * Enqueue script
+		 */
+		LemonGrid::include_script();
+
+		/**
 		 * Lib JS Imagelightbox
 		 */
 		wp_enqueue_script( 'tb-imagelightbox', 'http://osvaldas.info/examples/image-lightbox-responsive-touch-friendly/imagelightbox.js', array( 'jquery' ), '1.0.0', true );
