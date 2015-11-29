@@ -595,6 +595,186 @@
 	font-size: 13px;
 }
 
+/* Post layout 2 */
+.post_lemongrid--layout2{}
+.post_lemongrid--layout2 .lemongrid-item .grid-stack-item-content{
+	border: 8px solid #fff;
+    border-radius: 1px;
+    box-shadow: 0 0 10px 1px rgba(16, 16, 16, 0.1);
+    transition: box-shadow .3s;
+    -webkit-transition: box-shadow .3s;
+}
+.post_lemongrid--layout2 .lemongrid-item:hover .grid-stack-item-content{
+	box-shadow: 0 0 10px 2px rgba(16, 16, 16, 0.2);
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.1);
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info:before{
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: .5s;
+	-webkit-transition: .5s;
+
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d1386b+0,241b87+100&amp;0.43+0,0.45+100 */
+	background: -moz-linear-gradient(45deg,  rgba(209,56,107,0.43) 0%, rgba(36,27,135,0.45) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(45deg,  rgba(209,56,107,0.43) 0%,rgba(36,27,135,0.45) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(45deg,  rgba(209,56,107,0.43) 0%,rgba(36,27,135,0.45) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6ed1386b', endColorstr='#73241b87',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+.post_lemongrid--layout2 .lemongrid-item:hover .lemongrid-info:before{
+	opacity: 1;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .info-text-top,
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .info-text-bottom{
+	padding: 10px;
+	color: #FFF;
+	line-height: 24px;
+	z-index: 3;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .info-text-top{
+	position: relative;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .author{
+	font-size: 11px;
+    text-transform: capitalize;
+    font-style: italic;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .cat-icon{
+	font-size: 14px;
+    margin-right: 6px;
+    transform: rotate(-16deg);
+    -webkit-transform: rotate(-16deg);
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .post-categories{
+	margin: 0;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .post-categories li{
+	display: inline-block;
+	vertical-align: top;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .post-categories li a,
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info a[rel="category"]{
+	font-size: 11px;
+	color: #FFF;
+	text-decoration: none;
+	border: none;
+	font-style: italic;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .title{
+	color: #fff;
+    font-size: 13px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    margin: 0;
+    text-transform: uppercase;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .info-text-bottom{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .info-text-bottom .date{
+	font-size: 10px;
+    letter-spacing: 2px;
+    margin: 0;
+    text-transform: uppercase;
+    font-style: italic;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .lemongrid-icon.default{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	z-index: -1;
+}
+.post_lemongrid--layout2 .lemongrid-item:hover .lemongrid-info .lemongrid-icon.default{
+	z-index: 5;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .lemongrid-icon.default a{
+	background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    display: inline-block;
+    font-size: 11px;
+    height: 32px;
+    line-height: 32px;
+    width: 32px;
+    text-align: center;
+    text-decoration: none;
+    transform: rotate(-175deg) scale(0.5);
+    -webkit-transform: rotate(-175deg) scale(0.5);
+    opacity: 0;
+    vertical-align: middle;
+    transition: .3s;
+    -webkit-transition: .3s;
+}
+.post_lemongrid--layout2 .lemongrid-item:hover .lemongrid-info .lemongrid-icon.default a{
+	transform: rotate(-45deg) scale(1);
+    -webkit-transform: rotate(-45deg) scale(1);
+    opacity: 1;
+}
+.post_lemongrid--layout2 .lemongrid-item:hover .lemongrid-info .lemongrid-icon.default a:hover{
+	background: #FFF;
+	color: #333;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .lemongrid-icon.default a i{
+	transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .lemongrid-icon.default a:first{
+	margin-right: 5px;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .lemongrid-icon.default a:last-child{
+	-webkit-transition-delay: .1s; /* Safari */
+    transition-delay: .1s;
+    height: 42px;
+    line-height: 42px;
+    width: 42px;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 13px;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .lemongrid-icon.linestyle{
+	position: absolute;
+	right: 0;
+	top: 0;
+	line-height: 0;
+	z-index: 5;
+}
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info .lemongrid-icon.linestyle a{
+	color: #333;
+	text-decoration: none;
+	border: none;
+	font-size: 11px;
+	transform: translateX(110%) rotate(-180deg);
+	-webkit-transform: translateX(110%) rotate(-180deg);
+	transition: .3s;
+    -webkit-transition: .3s;
+    opacity: 0;
+
+	width: 24px;
+	height: 24px;
+	line-height: 24px;
+	display: inline-block;
+	text-align: center;
+	background: #FFF;
+}
+.post_lemongrid--layout2 .lemongrid-item:hover .lemongrid-info .lemongrid-icon.linestyle a{
+	transform: translateX(0) rotate(0deg);
+	-webkit-transform: translateX(0) rotate(0deg);
+	opacity: 1;
+}
+
 /* Widget */
 .lemongrid_widget{}
 .lemongrid_widget .widget--social{}

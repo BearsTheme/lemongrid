@@ -70,6 +70,11 @@ class LemonGrid
 		/* includes script backend */
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'tb-lemongrid-script-backend', TB_JS . 'lg_backend.js', array( 'jquery' ) );
+		wp_enqueue_style( 'tb-lemongrid-script-backend', TB_CSS . 'lg_backend.css' );
+		wp_localize_script( 'tb-lemongrid-script-backend', 'lgAdminObj', 
+			array( 
+				'ajaxurl' => admin_url('admin-ajax.php') 
+				) );
 		
 	}
 

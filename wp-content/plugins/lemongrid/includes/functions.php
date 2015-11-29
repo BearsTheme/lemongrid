@@ -359,3 +359,85 @@ function lgCustomNumberFormat( $num )
 
 	return $num;
 }
+
+/**
+ * lgGetComments
+ *
+ * @param string $filename 
+ */
+function lgGetComments( $filename )
+{
+	$tokens = token_get_all(file_get_contents( $filename ));
+	$comments = array();
+	$params = array();
+
+	foreach($tokens as $token) {
+	    if($token[0] == T_COMMENT || $token[0] == T_DOC_COMMENT) {
+	        $comments[] = $token[1];
+	    }
+	}
+
+	if( empty( $comments[0] ) ) return;
+
+	/* filter string */
+	$comments[0] = str_replace( array( '/*', '/**', '*/', '**/', '*' ) , '', $comments[0] );
+
+	/*  */
+	$segments = explode( PHP_EOL, $comments[0] );
+
+	/* build params */
+	if( count( $segments ) == 0 ) return;
+	foreach( $segments as $segment ) {
+		if( ! empty( trim( $segment ) ) ) {
+			$_arr = explode( ':', trim( $segment ), 2 );
+			if( count( $_arr ) == 2 )
+				$params[strtolower( $_arr[0] )] = ltrim( $_arr[1] );
+		}
+	}
+
+    return( $params );
+}
+
+/**
+ * lgRenderFieldTemplate
+ *
+ * @param array $field
+ * @return HTML
+ */
+function lgRenderFieldTemplate( $field )
+{
+	extract( $field );
+	$output = '';
+
+	switch ( $type ) {
+		case 'select':
+			$_options = '';
+			$_value = isset( $value ) ? $value : '';
+			foreach( $options as $o ) :
+				$selected = ( $_value == $o['value'] ) ? 'selected' : '';
+				$_options .= sprintf( '<option value="%s" %s>%s</option>', $o['value'], $selected, $o['text'] );
+			endforeach;
+
+			$output .= sprintf( '
+				<div class="lg-group-field-param">
+					<label class="wpb_element_label">%s</label>
+					<select name="%s">
+						%s
+					</select>
+				</div>', $title, $name, $_options );
+			break;
+		
+		default:
+			$output .= sprintf( '
+				<div class="lg-group-field-param">
+					<label class="wpb_element_label">%s</label>
+					<input name="%s" type="%s" value="%s" />
+				</div>', $title, $name, $type, $value );
+			break;
+	}
+
+	return $output;
+}
+
+
+

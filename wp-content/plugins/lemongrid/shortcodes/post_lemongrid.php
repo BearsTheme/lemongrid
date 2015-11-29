@@ -48,8 +48,16 @@ vc_map(
 	            'description' => __( '',TB_NAME ),
 	            'group' => __( 'Template', TB_NAME )
 	        ),
-	    	array(
+	    	/* array(
 	            'type' => 'lg_template',
+	            'heading' => __( 'Template', TB_NAME ),
+	            'param_name' => 'template',
+	            'shortcode' => 'post_lemongrid',
+	            'group' => __( 'Template', TB_NAME ),
+	        	),
+	    	) */
+			array(
+	            'type' => 'lg_supper_template',
 	            'heading' => __( 'Template', TB_NAME ),
 	            'param_name' => 'template',
 	            'shortcode' => 'post_lemongrid',
@@ -77,7 +85,10 @@ class WPBakeryShortCode_post_lemongrid extends WPBakeryShortCode
 		 */
 		LemonGrid::include_script();
 
+		$templateParams = json_decode( $atts['template'], true );
 		$atts['class_id'] = 'lemon_grid_id_' . $atts['element_id'];
+		$atts['template'] = $templateParams['template'];
+		$atts['template_params'] = $templateParams;
 
 		/**
 		 * wp_query
@@ -95,4 +106,29 @@ class WPBakeryShortCode_post_lemongrid extends WPBakeryShortCode
 		
 		return lgLoadTemplate( $atts, $content );
 	}
+}
+
+/**
+ * lgTemplateParams
+ */
+function lgPostLemongridLayout2Params()
+{
+	return array(
+		array(
+			'name' => 'style',
+			'title' => __( 'Style', TB_NAME ),
+			'type' => 'select',
+			'value' => 'default',
+			'options' => array(
+				array(
+					'value' => 'default',
+					'text' => __( 'Default', TB_NAME ),
+					),
+				array(
+					'value' => 'linestyle',
+					'text' => __( 'lineStyle', TB_NAME ),
+					),
+				)
+			)
+		);
 }
