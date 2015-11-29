@@ -662,7 +662,8 @@
 	vertical-align: top;
 }
 .post_lemongrid--layout2 .lemongrid-item .lemongrid-info .post-categories li a,
-.post_lemongrid--layout2 .lemongrid-item .lemongrid-info a[rel="category"]{
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info a[rel="category"],
+.post_lemongrid--layout2 .lemongrid-item .lemongrid-info a[rel="category tag"]{
 	font-size: 11px;
 	color: #FFF;
 	text-decoration: none;
